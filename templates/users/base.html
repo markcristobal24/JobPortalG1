@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Django Job Portal - Login</title>
+</head>
+<body>
+    <div class="container col-xl-10 col-xxl-8 px-4 py-5">
+        <div class="row align-items-center g-lg-5 py-5">
+            <div class="col-lg-7 text-center text-lg-start">
+                <h1 class="display-4 fw-bold lh-1 mb-3">Welcome to Django Job Porta</h1>
+                <p class="col-lg-10 fs-4">
+                    Find the job you need that is tailored to your experience, expertise and skill sets. There's plenty of jobs to go round for everyone. Goodluck with hunt!
+                </p>
+            </div>
+            <div class="col-md-10 mx-auto col-lg-5">
+                {% if messages %}
+                {% for message in messages %}
+                <div class="alert alert-{{message.tags}}" role="alert">
+                    <b>{{message}}</b>
+                </div>
+                {% endfor %}
+                {% endif %}
+
+                {% block content %}
+                {% endblock content %}
+                <!-- <form class="p-4 p-md-5 border rounder-3 bg-light">
+                    <div class="form-floating mb-3">
+                        <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+                        <label for="floatingInput">Email Address</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                        <label for="floatingPassword">Password</label>
+                    </div>
+                    <div class="checkbox mb-3">
+                        <label>
+                            <input type=""checkbox value="remember-me"> Remember me
+                        </label>
+                    </div>
+                    <button class="w-100 btn btn-lg btn-primary" type="submit">Sign In</button>
+                    <hr class="my-4">
+                    <small class="text-muted">Don't have an account? <a href="#">Register now!</a></small>
+                </form> -->
+            </div>
+        </div>
+    </div>
+</body>
+</html>
