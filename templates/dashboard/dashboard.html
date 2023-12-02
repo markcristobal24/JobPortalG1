@@ -3,6 +3,11 @@
 {% block content %}
 
 {% if request.user.is_applicant %}
+{% if not request.user.has_resume %}
+<div class="alert alert-danger" role="alert">
+    <b>You have not created a resume yet.<a href="{% url 'update-resume' %}">Create one</a></b>
+</div>
+{% endif %}
 <section class="container mt-5">
     <div class="p-5 mb-4 bg-light rounded-3">
         <div class="container-fluid py-5">
@@ -12,6 +17,11 @@
     </div>
 </section>
 {% elif request.user.is_recruiter %}
+{% if not request.user.has_company %}
+<div class="alert alert-danger" role="alert">
+    <b>You have not created a company yet.<a href="{% url 'update-company' %}">Create one</a></b>
+</div>
+{% endif %}
 <section class="container mt-5">
     <div class="p-5 mb-4 bg-light rounded-3">
         <div class="container-fluid py-5">

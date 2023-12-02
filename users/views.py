@@ -16,11 +16,12 @@ def register_applicant(request):
             var.username = var.email
             var.save()
             Resume.objects.create(user=var)
-            messages.info(requests, 'Your account has been created.')
+            messages.info(request, 'Your account has been created.')
             return redirect('login')
 
         else:
             messages.warning(request, 'Something went wrong')
+            print(form.errors)
             return redirect('register-applicant')
     else:
         form = RegisterUserForm()
@@ -36,11 +37,12 @@ def register_recruiter(request):
             var.username = var.email
             var.save()
             Company.objects.create(user=var)
-            messages.info(requests, 'Your account has been created.')
+            messages.info(request, 'Your account has been created.')
             return redirect('login')
 
         else:
             messages.warning(request, 'Something went wrong')
+            print(form.errors)
             return redirect('register-recruiter')
     else:
         form = RegisterUserForm()
