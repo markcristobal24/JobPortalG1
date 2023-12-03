@@ -4,6 +4,8 @@ from .models import Company
 from .form import UpdateCompanyForm
 from users.models import User
 
+
+
 # update company
 def update_company(request):
     if request.user.is_recruiter:
@@ -17,7 +19,7 @@ def update_company(request):
                 var.save()
                 user.save()
                 messages.info(request, 'Your company info has been updated!')
-                return render('dashboard')
+                return redirect('dashboard')
             else:
                 messages.warning(request, 'Something went wrong')
         else:
