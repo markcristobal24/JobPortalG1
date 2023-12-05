@@ -39,7 +39,7 @@ def update_job(request, pk):
         else:
             messages.warning(request, 'Something went wrong')
     else:
-        form = CreateJobForm()
+        form = UpdateJobForm(instance=job)
         context = {'form':form}
         return render(request, 'job/update_job.html', context)
     
@@ -71,3 +71,8 @@ def all_applicants(request, pk):
     applicants = job.applyjob_set.all()
     context = {'job':job, 'applicants':applicants}
     return render(request, 'job/all_applicants.html', context)
+
+def applied_jobs(request):
+    jobs = ApplyJob.objects.filter(user=request.user)
+    context = {'jobs':jobs}
+    return render(request, 'job/applied_job.html', context)
