@@ -62,14 +62,14 @@ def login_user(request):
             login(request, user)
             return redirect('dashboard')
         else:
-            messages.warning(request, 'Something went wrong')
+            messages.warning(request, 'Wrong email/username or password')
             return redirect('login')
     else:
         return render(request, 'users/login.html')
 
 def logout_user(request):
     logout(request)
-    messages.info(request, 'YOur session has ended.')
+    messages.info(request, 'Your session has ended.')
     return redirect('login')  
 
 def check_email_registered(email):

@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% if messages %}
+<div class="alert alert-{{message.tags}}" role="alert">
+    <b>{{message.0}}</b>
+</div>
+{% endif %}
+<table>
+    <thead>
+        <tr>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Has Resume</th>
+            <th>Is Active</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for user in users %}
+            {% if user.is_applicant %}
+                <tr>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.has_resume }}</td>
+                    <td>{{ user.is_active }}</td>
+                    <td>
+                        <form method="post" action="{% url 'activate_user' user.id %}">
+                            {% csrf_token %}
+                            <button class="btn btn-primary" type="submit" name="action" value="Activate">Activate</button>
+                        </form>
+                        
+                        <form method="post" action="{% url 'deactivate_user' user.id %}">
+                            {% csrf_token %}
+                            <button class="btn btn-danger" type="submit" name="action" value="Deactivate">Deactivate</button>
+                        </form>
+                        
+                        <form method="get" action="">
+                            <button class="btn btn-warning" type="submit" name="action" value="Edit">Edit</button>
+                        </form>
+
+                        <button class="btn btn-info"><a href="{% url 'view_resume' user.id %}" target="_blank">View</a></button>
+                    </td>
+                </tr>
+            {% endif %}
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock content %}

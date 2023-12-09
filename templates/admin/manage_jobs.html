@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% if messages %}
+<div class="alert alert-{{message.tags}}" role="alert">
+    <b>{{message.0}}</b>
+</div>
+{% endif %}
+<table>
+    <thead>
+        <tr>
+            <th>Company</th>
+            <th>Job Title</th>
+            <th>Available</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for job in jobs %}
+            <tr>
+                <td>{{ job.company }}</td>
+                <td>{{ job.title }}</td>
+                <td>{{ job.is_available }}</td>
+                <td>
+                    <form method="post" action="{% url 'activate_job' job.id %}">
+                        {% csrf_token %}
+                        <button class="btn btn-primary" type="submit" name="action" value="Activate">Activate</button>
+                    </form>
+                    
+                    <form method="post" action="{% url 'deactivate_job' job.id %}">
+                        {% csrf_token %}
+                        <button class="btn btn-danger" type="submit" name="action" value="Deactivate">Deactivate</button>
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock content %}

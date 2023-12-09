@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'dashboard',
     'job',
     'website',
+    'admin2',
     'django_filters'
 ]
 
