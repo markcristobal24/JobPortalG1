@@ -3,46 +3,24 @@
 
 {% block content %}
 
-<div>
-
-    <div class="text-center pb-2">
-
-        <h1 style="font-weight: bold; color: #202430; ">Create an Account for Recruiter</h1>
-        <span>Sign up to find jobs that is suitable folr yuour skills.</span>
-
+<form class="p-4 p-md-5 border rounder-3 bg-light" method="POST">
+    {% csrf_token %}
+    <div class="form-floating mb-3">
+        {% render_field form.email class="form-control" %}
+        <label for="floatingInput">Email Address</label>
+    </div>
+    <div class="form-floating mb-3">
+        {% render_field form.password1 class="form-control" %}
+        <label for="floatingInput">Password</label>
+    </div>
+    <div class="form-floating mb-3">
+        {% render_field form.password2 class="form-control" %}
+        <label for="floatingInput">Confirm Password</label>
     </div>
 
-</div>
-<div style="width: 600px; max-width: 100%;">
-
-    <form class="p-4 p-md-5" method="POST" action="{% url 'register-recruiter' %}">
-        {% csrf_token %}
-        <div class="form-group mb-3">
-            <label for="email">Email Address</label>
-            {% render_field form.email class="form-control  p-3 mt-2 rounded-3" id="email"  placeholder="Enter Email"%}
-            
-        </div>
-        <div class="form-group mb-3">
-            <label for="pass1">Password</label>
-            {% render_field form.password1 class="form-control  p-3 mt-2 rounded-3" id="pass1" placeholder="Enter password"%}
-            
-        </div>
-        <div class="form-group mb-3">
-            <label for="pass2">Confirm Password</label>
-            {% render_field form.password2 class="form-control  p-3 mt-2 rounded-3" id="pass2" placeholder="Confirm password"%}
-           
-        </div>
-    
-        <button class="w-100 btn mt-2 rounded-3 p-2 text-white mb-4"  style="background-color: #372554;" type="submit">Sign Up</button>
-
-        <div class="text-center">
-
-            <small class="text-muted">Already have an account? <a href="{% url 'login' %}" style="text-decoration: none; color: #372554; font-weight: bold;">Sign in</a></small>
-
-        </div>
-        
-    </form>
-        
-</div>
+    <button class="w-100 btn btn-lg btn-primary" type="submit">Sign Up</button>
+    <hr class="my-4">
+    <small class="text-muted">Already have an account? <a href="{% url 'login' %}">Sign in</a></small>
+</form>
 
 {% endblock content %}

@@ -32,19 +32,16 @@ def register_recruiter(request):
     if request.method == 'POST':
         form = RegisterUserForm(request.POST)
         if form.is_valid():
-            email = request.POST.get('email')
-            if check_email_registered(email):
-                messages.warning(request, 'Email already exist.')
-            else:
-                var = form.save(commit=False)
-                var.is_recruiter = True
-                var.username = var.email
-                var.save()
-                Company.objects.create(user=var)
-                messages.info(request, 'Your account has been created.')
-                return redirect('login')
+            var = form.save(commit=False)
+            var.is_recruiter = True
+            var.username = var.email
+            var.save()
+            Company.objects.create(user=var)
+            messages.info(request, 'Your account has been created.')
+            return redirect('login')
+
         else:
-            messages.warning(request, 'Email already exist')
+            messages.warning(request, 'Something went wrong')
             print(form.errors)
             return redirect('register-recruiter')
     else:
@@ -62,16 +59,12 @@ def login_user(request):
             login(request, user)
             return redirect('dashboard')
         else:
-            messages.warning(request, 'Wrong email/username or password')
+            messages.warning(request, 'Something went wrong')
             return redirect('login')
     else:
         return render(request, 'users/login.html')
 
 def logout_user(request):
     logout(request)
-    messages.info(request, 'Your session has ended.')
-    return redirect('login')  
-
-def check_email_registered(email):
-    email_exists = User.objects.filter(email=email).exists()
-    return email_exists            
+    messages.info(request, 'YOur session has ended.')
+    return redirect('login')              

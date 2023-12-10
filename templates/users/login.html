@@ -2,39 +2,19 @@
 
 {% block content %}
 
-    <div class="text-center">
-
-        <h1 style="font-weight: bold; color: #202430; ">Welcome back!</h1>
-        <span>Log on to access the portal to success.</span>
-
+<form class="p-4 p-md-5 border rounder-3 bg-light" method="POST">
+    {% csrf_token %}
+    <div class="form-floating mb-3">
+        <input type="email" name="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+        <label for="floatingInput">Email Address</label>
     </div>
-
-    <div>
-
-        <form class="p-md-5 rounder-3 " method="POST"  style="width: 600px; max-width: 100%;">
-            {% csrf_token %}
-    
-            <div class="form-group mb-3">
-
-                
-                <label for="floatingInput">Username or Email Address</label>
-                <input type="email" name="email" class="form-control p-3 mt-2 rounded-3" id="floatingInput" placeholder="Enter username or email address">
-                
-            </div>
-            <div class="form-group mb-3">
-
-                <label for="floatingPassword">Password</label>
-                <input type="password" name="password" class="form-control p-3 mt-2 rounded-3" id="floatingPassword" placeholder="Password">
-                
-            </div>
-            <button class="w-100 btn btn-lg mt-2 mb-4 rounded-3 p-2 text-white" type="submit" style="background-color: #372554;" id="loginbtn">Sign In</button>
-        
-            <div class="text-center">
-                <small class="text-muted ">Don't have an account? <a href="{% url 'register-recruiter' %}" style="text-decoration: none; color: #372554; font-weight: bold;">Sign Up</a></small>
-            </div>
-            
-        </form>
-
+    <div class="form-floating mb-3">
+        <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Password">
+        <label for="floatingPassword">Password</label>
     </div>
+    <button class="w-100 btn btn-lg btn-primary" type="submit">Sign In</button>
+    <hr class="my-4">
+    <small class="text-muted">Don't have an account? <a href="#">Register now!</a></small>
+</form>
 
 {% endblock content %}
