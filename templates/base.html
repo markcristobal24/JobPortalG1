@@ -62,12 +62,12 @@
         </style>
     </head>
     <body style="background-color: #F1F3F8;">
-        <nav class="navbar navbar-expand-lg p-4 " style="background-color: white;">
+        <nav class="navbar navbar-expand-lg p-3 " style="background-color: white;">
             <div class="container-fluid" >
 
                 
-                <a class="navbar-brand text-black" href="{% url 'home' %}" style="font-weight: bold; color: #202430;">
-                    <img src="https://drive.google.com/uc?id=1eoFAioOuWdJa9wRr8uy4zRLLGLtrf60L" alt="">
+                <a class="navbar-brand text-black" href="{% url 'dashboard' %}" style="font-weight: bold; color: #202430;">
+                    <img src="https://drive.google.com/uc?id=1eoFAioOuWdJa9wRr8uy4zRLLGLtrf60L" alt="" style="height: 60px; width: 150px;">
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -81,7 +81,7 @@
                     {% if request.user.is_applicant %}
                     <ul class="navbar-nav ms-auto me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active mx-5" aria-current="page" href="#">Home</a>
+                            <a class="nav-link active mx-5" aria-current="page" href="{% url 'home' %}">Home</a>
                         </li>
                         {% if request.user.has_resume %}
                         <li class="nav-item">
@@ -105,11 +105,11 @@
                     {% elif request.user.is_recruiter %}
                     <ul class="navbar-nav  ms-auto me-auto mb-2 mb-lg-0 align-content-center">
                         <li class="nav-item">
-                            <a class="nav-link active text-black mx-5" aria-current="page" href="#">Home</a>
+                            <a class="nav-link active text-black mx-5" aria-current="page" href="{% url 'dashboard' %}">Home</a>
                         </li>
                         {% if request.user.has_company %}
                         <li class="nav-item">
-                            <a class="nav-link text-black mx-5" href="{% url 'create-job' %}">Create Job Ads</a>
+                            <a class="nav-link text-black mx-5" href="{% url 'create-job' %}">Create Job Listing</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-black mx-5" href="{% url 'manage-jobs' %}">Manage Jobs</a>
