@@ -6,15 +6,67 @@
 
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
             integrity="" crossorigin="anonymous">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500&family=Red+Hat+Display:wght@300;600;700&display=swap" rel="stylesheet">
 
         <title>Django Job Portal</title>
+
+        <style>
+
+        h2{
+            font-family: 'Red Hat Display', sans-serif;
+            font-weight: bold; 
+            color: #202430; 
+        } 
+
+        button, label, input, p, a, small{
+
+        font-family: 'Epilogue', sans-serif;
+
+        }
+
+        label{
+
+        font-weight: 500;
+
+        }
+
+        .nav-item a {
+            position: relative;
+            text-decoration: none; /* Remove default underline */
+            color: #000; /* Set the default text color */
+        }
+
+        .nav-item a::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px; /* Adjust the thickness of the line */
+            bottom: 0;
+            left: 0;
+            background-color: #000; /* Set the color of the line */
+            transform: scaleX(0);
+            transform-origin: bottom right;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .nav-item a:hover::before {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
+
+
+
+
+        </style>
     </head>
     <body style="background-color: #F1F3F8;">
-        <nav class="navbar navbar-expand-lg navbar-dark p-4" style="background-color: white;">
-
+        <nav class="navbar navbar-expand-lg p-4" style="background-color: white;">
             <div class="container-fluid">
 
-                <a class="navbar-brand" href="{% url 'home' %}">Django Job </a>
+                <img src="https://drive.google.com/uc?id=1eoFAioOuWdJa9wRr8uy4zRLLGLtrf60L" alt="">
+                <a class="navbar-brand text-black" href="{% url 'home' %}" style="font-weight: bold; color: #202430;">Jobbl </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                     aria-label="Toggle navigation">
@@ -49,20 +101,20 @@
 
 
                     {% elif request.user.is_recruiter %}
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <ul class="navbar-nav  ms-auto me-auto mb-2 mb-lg-0 align-content-center">
                         <li class="nav-item">
-                            <a class="nav-link active text-black" aria-current="page" href="#">Home</a>
+                            <a class="nav-link active text-black mx-5" aria-current="page" href="#">Home</a>
                         </li>
                         {% if request.user.has_company %}
                         <li class="nav-item">
-                            <a class="nav-link text-black" href="{% url 'create-job' %}">Create Job Ads</a>
+                            <a class="nav-link text-black mx-5" href="{% url 'create-job' %}">Create Job Ads</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-black" href="{% url 'manage-jobs' %}">Manage Jobs</a>
+                            <a class="nav-link text-black mx-5" href="{% url 'manage-jobs' %}">Manage Jobs</a>
                         </li>
                         {% else %}
                         <li class="nav-item">
-                            <a class="nav-link text-black" href="{% url 'update-company' %}">Create Company</a>
+                            <a class="nav-link text-black mx-5" href="{% url 'update-company' %}">Create Company</a>
                         </li>
                         {% endif %}
                         
@@ -92,11 +144,11 @@
                             <a class="nav-link" href="#">Reports</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link disabled" href="" tabindex="-1" aria-disabled="true">{{request.user.email}}</a>
+                            <a class="nav-link disabled text-bg-warning" href="" tabindex="-1" aria-disabled="true">{{request.user.email}}</a>
                         </li>
                     </ul>
                     {% endif %}
-                    <a href="{% url 'logout' %}" class="btn rounded-5 px-4 py-2 text-white" style="background: rgb(55,37,84); background: linear-gradient(87deg, rgba(55,37,84,1) 8%, rgba(138,132,226,1) 87%); font-weight: bold;" >LOG OUT</a>
+                    <a href="{% url 'logout' %}" class="btn rounded-5 px-4 py-2 text-white" style="background: rgb(55,37,84); background: linear-gradient(87deg, rgba(55,37,84,1) 8%, rgba(138,132,226,1) 87%); font-weight: bold; font-family: 'Red Hat Display', sans-serif;" >LOG OUT</a>
                     {% else %}
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
