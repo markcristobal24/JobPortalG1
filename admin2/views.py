@@ -5,6 +5,8 @@ from users.models import User
 from job.models import Job
 from resume.models import Resume
 from django.http import FileResponse
+from django.shortcuts import get_object_or_404
+from django.http import Http404, HttpResponse, HttpResponseNotFound
 
 
 # Create your views here.
@@ -44,12 +46,22 @@ def edit_user(request, user_id):
     pass
 
 def view_resume(request, user_id):
-    resume = Resume.objects.get(user=user_id)
-    file_path = str(resume.upload_resume.path)
-    print(file_path)
-    response = FileResponse(open(file_path, 'rb'), content_type='application/pdf')
-    response['Content-Disposition'] = 'inline; filename="resume.pdf"'
-    return response
+    try:
+        resume = get_object_or_404(Resume, user=user_id)
+
+        if resume.upload_resume:
+            file_path = str(resume.upload_resume.path)
+            
+            response = FileResponse(open(file_path, 'rb'), content_type='application/pdf')
+            response['Content-Disposition'] = 'inline; filename="resume.pdf"'
+            return response
+        else:
+            raise Http404("No resume file available for this user.")
+    except Http404 as e:
+        return HttpResponseNotFound(f"Resume not found: {str(e)}")
+    except Exception as e:
+        print(f"An error occurred: {str(e)}")
+        return HttpResponse("An error occurred", status=500)
 
 def activate_job(request, job_id):
     job = Job.objects.get(pk=job_id)

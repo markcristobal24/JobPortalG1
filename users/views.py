@@ -13,12 +13,10 @@ def register_applicant(request):
         if form.is_valid():
             var = form.save(commit=False)
             var.is_applicant = True
-            var.username = var.email
             var.save()
             Resume.objects.create(user=var)
             messages.info(request, 'Your account has been created.')
             return redirect('login')
-
         else:
             messages.warning(request, 'Something went wrong')
             print(form.errors)
@@ -34,7 +32,6 @@ def register_recruiter(request):
         if form.is_valid():
             var = form.save(commit=False)
             var.is_recruiter = True
-            var.username = var.email
             var.save()
             Company.objects.create(user=var)
             messages.info(request, 'Your account has been created.')
