@@ -63,5 +63,5 @@ def login_user(request):
 
 def logout_user(request):
     logout(request)
-    messages.info(request, 'YOur session has ended.')
+    messages.info(request, 'Your session has ended.')
     return redirect('login')              
