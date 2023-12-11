@@ -44,7 +44,9 @@ def edit_user(request, user_id):
     pass
 
 def view_resume(request, user_id):
-    file_path = "media/resume/IT_403_WMAD_-_Project_Rubric_Job_Portal_-_1st_Sem_22-23.pdf"
+    resume = Resume.objects.get(user=user_id)
+    file_path = str(resume.upload_resume.path)
+    print(file_path)
     response = FileResponse(open(file_path, 'rb'), content_type='application/pdf')
     response['Content-Disposition'] = 'inline; filename="resume.pdf"'
     return response
