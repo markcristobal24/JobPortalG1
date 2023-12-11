@@ -7,45 +7,64 @@
         <div class="card mt-2 mb-4 p-5 rounded-5">
             <div class="car-body">
 
-                <div class="mb-5 text-center">
+                <div class="mb-2 text-center">
 
-                    <h2 class="card-title">Create a Company Profile</h2>
-                    <span>Summarizing role details to attract applicants</span>
+                    <h2 class="card-title">Create Company Profile</h2>
+                    <span>Specify the information needed. </span>
 
                 </div>
 
                 <form method="post">
                     {% csrf_token %}
 
-                    <div class="form-group">
-                        <label for="imageInput">Choose Image:</label>
-                        <input type="file" class="form-control-file" id="imageInput" accept="image/*">
-                    </div>
 
                     
-                    <div class="form-group justify-content-center">
-                        <label for="imagePreview">Image Preview:</label>
-                        <img src="" alt="Image Preview" class="img-fluid" id="imagePreview" style="height: 250px; width: 250px;">
+                    <div class="form-group text-center">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png" alt="Image Preview" class="img-fluid m-5" id="imagePreview" style="height: 250px; width: 250px; border: 1px solid; border-color: rgb(206, 206, 206); border-radius: 30px;">
                     </div>
+                    <div class="input-group mb-3"> <!-- IMAGE INPUT -->
+                        <input type="file" class="form-control p-3 rounded-3 required" id="imageInput" accept="image/*">
+                        <label for="imageInput" class="input-group-text">Choose Image:</label>
+                    </div>
+                    <div class="mb-3"> <!-- bago -->
+                        <label for="exampleInputEmail" class="form-label">Contact Person</label>
+                        {% render_field form.name class="form-control p-3 rounded-3 required" %} 
+                    </div>
+                    <div class="mb-3"> <!-- bago -->
+                        <label for="exampleInputEmail" class="form-label">Contact Number</label>
+                        {% render_field form.name class="form-control p-3 rounded-3 required" %}
+                    </div>
+
+
+
+
+
+
 
                     <div class="mb-3">
                         <label for="exampleInputEmail" class="form-label">Company Name</label>
-                        {% render_field form.name class="form-control" %}
+                        {% render_field form.name class="form-control p-3 rounded-3 required" %}
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputEmail" class="form-label">Established Date</label>
-                        {% render_field form.est_date class="form-control" %}
-                    </div>
-                    <div class="mb-3">
-                        <label for="exampleInputEmail" class="form-label">City</label>
-                        {% render_field form.city class="form-control" %}
-                    </div>
-                    <div class="mb-3">
-                        <label for="exampleInputEmail" class="form-label">State/Province</label>
-                        {% render_field form.state class="form-control" %}
+                        {% render_field form.est_date class="form-control p-3 rounded-3 required" %}
                     </div>
 
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <div class="row">
+
+                        <div class="col-md-6 mb-3">
+                            <label for="exampleInputEmail" class="form-label">City</label>
+                            {% render_field form.city class="form-control p-3 rounded-3 required" %}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="exampleInputEmail" class="form-label">Country</label>
+                            {% render_field form.state class="form-control p-3 rounded-3 required" %}
+                        </div>
+                        
+                    </div>
+                
+
+                    <button type="submit" class="w-100 btn rounded-3 p-2 text-white mt-3" style="background-color: #372554;">Submit</button>
                 </form>
             </div>
         </div>
@@ -54,7 +73,7 @@
 
 </script>
 
-<!-- Custom JavaScript for image preview -->
+
 <script>
     // Function to handle image preview
     function previewImage(input) {

@@ -2,39 +2,104 @@
 
 {% block content %}
 
-<div class="card mx-auto" style="width: 76rem;">
-        <div class="card-body">
-            <h5 class="card-title mb-3">Manage Jobs</h5>
+<div class="container-fluid p-0">
+    <div class="row flex-nowrap">
+        <div class="col-md-3 min-vh-100 px-5 py-3 d-flex flex-column" style=" border-right: 2px solid #d4d4d4; ">
+            <div class="d-flex align-items-center" style="border-radius: 10px;">
+                <div class="rounded-circle overflow-hidden me-3" style="width: 50px; height: 50px; border: 2px solid #fff;">
+                    <!-- Dito malalagay image ng company-->
+                    <img src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Profile Picture" class="w-100 h-100 object-fit-cover">
+                </div>
+                <div>
+                    <a class="d-flex text-decoration-none mt-3 align-items-center">
+                        <span class="fs-5 d-none d-sm-inline" style="color: #372554;">Welcome,</span><br>
+                    </a>
+                    <p style="color: #372554;">{{request.user.email}}<span>!</span></p>
+                </div>
+            </div>
+            <hr>
+            <ul class="nav nav-pills flex-column">
+                <li class="nav-item my-2 py-sm-0 mt-3">
+                    <a href="{% url 'create-job' %}" class="nav-link">
+                        <i class="fa-solid fa-gauge" style="width: 20px; height: 20px;"></i><span class="fs-6 ms-2 d-none d-sm-inline" >Create Job Listing</span>
+                    </a>
+                </li>
+                <li class="nav-item my-2 py-sm-0">
+                    <a href="{% url 'manage-jobs' %}" class="nav-link fw-bold"  style="background-color:  #E9EBFD; color: #372554;">
+                        <i class="fa-solid fa-users" style="width: 20px; height: 20px;"></i><span class="fs-6 d-none ms-2 d-sm-inline">Manage Jobs</span>
+                    </a>
+                </li>
+                <hr>
+                <p class="ms-3 py-2">Setting</p>
+                <li class="nav-item my-2 py-sm-0">
+                    <a href="#" class="nav-link">
+                        <i class="fa-solid fa-user-tie" style="width: 20px; height: 20px;"></i><span class="fs-6 d-none ms-2 d-sm-inline">Change Password</span>
+                    </a>
+                </li>
+                <li class="nav-item my-2 py-sm-0 mb-3">
+                    <a href="#" class="nav-link">
+                        <i class="fa-solid fa-file-contract" style="width: 20px; height: 20px;"></i><span class="fs-6 d-none ms-2 d-sm-inline">Edit Profile</span>
+                    </a>
+                </li>
+            </ul>
+           
+            
+            
+        </div>
+        <div class="col-md-9">
+            <div class="p-5 m-3" style="background-color: #F1F3F8;">
+                <div class="card-body ">
+                    <h2 class="card-title mb-4 " style="color: #372554;">Manage Jobs</h2>
+                    <hr class="mt-5">
+                    <h5 class="mb-4">Job Listing</h5>
+                    
+                    <table class="table table-with-gap">
+                        <thead>
+                            <tr class="bg-black">
+                                <th scope="col" class="text-center text-secondary">Job Title</th>
+                                <th scope="col" class="text-center text-secondary">Status</th>
+                                <th scope="col" class="text-center text-secondary">No. of Applicants</th>
+                                <th scope="col" class="text-secondary">Salary</th>
+                                <th scope="col" class="text-center text-secondary">Location</th>
+                                <th scope="col" class="text-center text-secondary">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for job in jobs %}
+                            <tr class="align-middle">
+                                <td class="text-center">{{job.title}}</td>
+                                {% if job.is_available %}
+                                <td class="text-center"><span class="badge px-3 py-2" style="color: #56CDAD; border: 2px solid #56CDAD; border-radius: 20px; height: 30px; width: 90px; font-weight: bold;">Active</span></td>
+                                {% else %}
+                                <td class="text-center"><span class="badge px-3 py-2" style="color: #FF6550; border: 2px solid #FF6550; border-radius: 20px; height: 30px; width: 90px; font-weight: bold;">Inactive</span></td>
+                                {% endif %}
+                                <td class="text-center px-5">
+                                    <div style="float: left;">
+                                      {{ job.applyjob_set.all.count }}
+                                    </div>
+                                    <div style="float: right;">
+                                      <a href="{% url 'all-applicants' job.pk %}" class="badge px-3 py-2" style="text-decoration: none; color: #252525; border: 2px solid #000000; border-radius: 20px; height: 30px; width: 90px; font-weight: bold;">
+                                        <small>View All</small>
+                                      </a>
+                                    </div>
+                                </td>
+                                <td>{{job.salary}}</td>
+                                <td class="text-center">{{job.location}}</td>
+                                <td class="text-center">
+                                    <a class="btn text-white" href="{% url 'update-job' job.pk %}" style=" background-color: #8A84E2;"><small>Update</small></a>    
+                                    <a class="btn btn-danger" href="#" ><i class="fa-solid fa-x"></i></a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
 
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th scope="col">Job Title</th>
-                        <th scope="col">Location</th>
-                        <th scope="col">Salary</th>
-                        <th scope="col">No. of Applicants</th>
-                        <th scope="col">Status</th>
-                        <th scope="col">Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for job in jobs %}
-                    <tr>
-                        <td>{{job.title}}</td>
-                        <td>{{job.location}}</td>
-                        <td>{{job.salary}}</td>
-                        <td>{{job.applyjob_set.all.count}}<a href="{% url 'all-applicants' job.pk %}"><small>View All</small></a></td>
-                        {% if job.is_available %}
-                        <td><span class="badge bg-success">Active</span></td>
-                        {% else %}
-                        <td><span class="badge bg-warning">Inactive</span></td>
-                        {% endif %}
-                        <td><a href="{% url 'update-job' job.pk %}"><small>Update Job</small></a></td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+                </div>
+            </div>
         </div>
     </div>
+</div>
+
+<script src="https://kit.fontawesome.com/e9e220f4bb.js" crossorigin="anonymous"></script>
 
 {% endblock content %}
