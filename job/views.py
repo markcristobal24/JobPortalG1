@@ -3,6 +3,8 @@ from django.contrib import messages
 from .models import Job, ApplyJob
 from .form import CreateJobForm, UpdateJobForm
 from django.contrib.auth.decorators import login_required
+from django.core.mail import send_mail
+from users.models import User
 
 @login_required
 def create_job(request):
@@ -15,6 +17,9 @@ def create_job(request):
                 var.company = request.user.company
                 var.save()
                 messages.info(request, 'New job has been created')
+                applicant_emails = User.objects.filter(is_applicant=True).values_list('email', flat=True)
+                for email in applicant_emails:
+                    send_mail('Jobbl: New Job Alert', '<company> has posted a new job listing. Check it out!', 'jobbl.jobalerts@gmail.com', [email], fail_silently=False)
                 return redirect('dashboard')
             else:
                 messages.warning(request, 'Something went wrong')
