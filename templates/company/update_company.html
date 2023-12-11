@@ -2,14 +2,32 @@
 {% load widget_tweaks %}
 
 {% block content %}
-<div class="row">
-    <div class="col-md-6">
-        <div class="card mx-auto" style="width: 40rem;">
+<div class="row justify-content-center">
+    <div class="col-md-7 pt-3">
+        <div class="card mt-2 mb-4 p-5 rounded-5">
             <div class="car-body">
-                <h5 class="card-title mb-3">Create a Company</h5>
+
+                <div class="mb-5 text-center">
+
+                    <h2 class="card-title">Create a Company Profile</h2>
+                    <span>Summarizing role details to attract applicants</span>
+
+                </div>
 
                 <form method="post">
                     {% csrf_token %}
+
+                    <div class="form-group">
+                        <label for="imageInput">Choose Image:</label>
+                        <input type="file" class="form-control-file" id="imageInput" accept="image/*">
+                    </div>
+
+                    
+                    <div class="form-group justify-content-center">
+                        <label for="imagePreview">Image Preview:</label>
+                        <img src="" alt="Image Preview" class="img-fluid" id="imagePreview" style="height: 250px; width: 250px;">
+                    </div>
+
                     <div class="mb-3">
                         <label for="exampleInputEmail" class="form-label">Company Name</label>
                         {% render_field form.name class="form-control" %}
@@ -33,4 +51,31 @@
         </div>
     </div>
 </div>
+
+</script>
+
+<!-- Custom JavaScript for image preview -->
+<script>
+    // Function to handle image preview
+    function previewImage(input) {
+        var preview = document.getElementById('imagePreview');
+        var file = input.files[0];
+        var reader = new FileReader();
+
+        reader.onloadend = function () {
+            preview.src = reader.result;
+        }
+
+        if (file) {
+            reader.readAsDataURL(file);
+        } else {
+            preview.src = "";
+        }
+    }
+
+    // Event listener for file input change
+    document.getElementById('imageInput').addEventListener('change', function () {
+        previewImage(this);
+    });
+</script>
 {% endblock content %}
