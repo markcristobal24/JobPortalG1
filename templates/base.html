@@ -150,7 +150,7 @@
                         </li>
                     </ul>
                     {% endif %}
-                    <a href="{% url 'logout' %}" class="btn rounded-5 px-4 py-2 text-white" style="background: rgb(55,37,84); background: linear-gradient(87deg, rgba(55,37,84,1) 8%, rgba(138,132,226,1) 87%); font-weight: bold; font-family: 'Red Hat Display', sans-serif;" >LOG OUT</a>
+                    <a href="#" id="logoutButton" class="btn rounded-5 px-4 py-2 text-white" style="background: rgb(55,37,84); background: linear-gradient(87deg, rgba(55,37,84,1) 8%, rgba(138,132,226,1) 87%); font-weight: bold; font-family: 'Red Hat Display', sans-serif;" >LOG OUT</a>
                     {% else %}
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
@@ -182,6 +182,45 @@
             {% endblock content %}
         </div>
 
+       <div class="modal fade" id="modalLogOut" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Logging Out</h5>
+                </div>
+                <div class="modal-body" id="modalLogOutConfirmation">
+                    <!-- Updated ID -->
+                    <!-- ...modal content for log out confirmation -->
+                    Are you sure you want to log out?
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" id="logoutBtn" onclick="window.location.href = '{% url 'logout' %}';">
+                            Log Out
+                        </button>
+                        <button type="button" class="btn btn-secondary" id="cancelLogOutBtn">
+                            Cancel
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- Your other content -->
+
+<!-- JavaScript code -->
+<script>
+    // Get the modal
+    var logout = document.getElementById('logoutButton');
+    logout.addEventListener('click', function () {
+    $('#modalLogOut').modal('show');
+    $('#cancelLogOutBtn').on("click", function (e) {
+        $('#modalLogOut').modal('hide');
+    });
+});
+</script>
+<script src="https://code.jquery.com/jquery-3.7.0.js"
+        integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
        
     </body>
 </html>
