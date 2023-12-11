@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% if messages %}
+<div class="alert alert-{{message.tags}}" role="alert">
+    <b>{{message.0}}</b>
+</div>
+{% endif %}
+<table>
+    <thead>
+        <tr>
+            <th>Total Applicants</th>
+            <th>Total Recruiters</th>
+            <th>Total Job Listings</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{ applicants }}</td>
+            <td>{{ recruiters }}</td>
+            <td>{{ jobs }}</td>
+        </tr>
+    </tbody>
+</table>
+{% endblock content %}

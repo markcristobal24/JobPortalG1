@@ -18,6 +18,24 @@ def manage_recruiters(request):
     users = User.objects.all()
     return render(request, 'admin/manage_recruiters.html', {'users':users})
 
+def manage_reports(request):
+    users = User.objects.all()
+    applicant_count = 0
+    recruiter_count = 0
+    for user in users:
+        if user.is_applicant:
+            applicant_count += 1
+            print("Applicant: ",user.email)
+        elif user.is_recruiter:
+            recruiter_count += 1
+            print("Recruiter: ",user.email)
+
+    jobs = Job.objects.all()
+    job_count = 0
+    for job in jobs:
+        job_count+=1
+    return render(request, 'admin/manage_reports.html', {'applicants':applicant_count, 'recruiters':recruiter_count, 'jobs':job_count})
+
 def admin_jobs(request):
     jobs = Job.objects.all()
     return render(request, 'admin/manage_jobs.html', {'jobs':jobs})
