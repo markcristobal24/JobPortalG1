@@ -10,6 +10,10 @@
         <label for="floatingInput">Email Address</label>
     </div>
     <div class="form-floating mb-3">
+        {% render_field form.username class="form-control" %}
+        <label for="floatingInput">Username</label>
+    </div>
+    <div class="form-floating mb-3">
         {% render_field form.password1 class="form-control" %}
         <label for="floatingInput">Password</label>
     </div>
