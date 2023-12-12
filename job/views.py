@@ -18,9 +18,9 @@ def create_job(request):
                 var.company = request.user.company
                 var.save()
                 messages.info(request, 'New job has been created')
-                applicant_emails = User.objects.filter(is_applicant=True).values_list('email', flat=True)
+                applicant_emails = User.objects.filter(receive_alerts=True).values_list('email', flat=True)
                 for email in applicant_emails:
-                    send_mail('Jobbl: New Job Alert', '<company> has posted a new job listing. Check it out!', 'jobbl.jobalerts@gmail.com', [email], fail_silently=False)
+                    send_mail('Jobbl: New Job Alert', f"{var.company} has posted a new job listing for the {var.title} position. Check it out!", 'jobbl.jobalerts@gmail.com', [email], fail_silently=False)
                 
                 return redirect('dashboard')
             else:
