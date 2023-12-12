@@ -1,10 +1,11 @@
 from django.shortcuts import render,redirect
 from django.contrib import messages
-from django.contrib.auth import authenticate , login, logout
+from django.contrib.auth import authenticate , login, logout, update_session_auth_hash
 from .models import User
-from .form import RegisterUserForm
+from .form import RegisterUserForm, ChangePasswordForm
 from resume.models import Resume
 from company.models import Company
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def register_applicant(request):
@@ -65,3 +66,31 @@ def logout_user(request):
     logout(request)
     messages.info(request, 'Your session has ended.')
     return redirect('login')
+
+@login_required
+def change_password(request):
+    if request.method == 'POST':
+        form = ChangePasswordForm(request.POST)
+        if form.is_valid():
+            current_password = form.cleaned_data['current_password']
+            new_password = form.cleaned_data['new_password']
+            confirm_password = form.cleaned_data['confirm_password']
+
+            if new_password != confirm_password:
+                messages.error(request, "New passwords do not match.")
+                #return redirect here
+            
+            if not request.user.check_password(current_password):
+                messages.error(request, "Current password is incorrect.")
+                #return redirect here
+            
+            request.user.set_password(new_password)
+            request.user.save()
+
+            update_session_auth_hash(request, request.user)
+
+            messages.success(request, "Password successfully changed.")
+            #return redirect here
+        else:
+            form = ChangePasswordForm()
+        #return render here

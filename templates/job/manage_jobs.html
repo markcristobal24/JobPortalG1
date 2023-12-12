@@ -87,7 +87,7 @@
                                 <td class="text-center">{{job.location}}</td>
                                 <td class="text-center">
                                     <a class="btn text-white" href="{% url 'update-job' job.pk %}" style=" background-color: #8A84E2;"><small>Update</small></a>    
-                                    <a class="btn btn-danger" href="#" ><i class="fa-solid fa-x"></i></a>
+                                    <a class="btn btn-danger" href="{% url 'delete-job' job.pk %}" ><i class="fa-solid fa-x"></i></a>
                                 </td>
                             </tr>
                             {% endfor %}
