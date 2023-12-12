@@ -65,6 +65,7 @@ def edit_user(request, user_id):
 
 def view_resume(request, user_id):
     try:
+        print("id: ",user_id)
         resume = get_object_or_404(Resume, user=user_id)
 
         if resume.upload_resume:
