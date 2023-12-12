@@ -49,13 +49,13 @@
         <div class="col-md-9">
             <div class="p-5 m-3" style="background-color: #F1F3F8;">
                 <div class="card-body ">
-                    <h2 class="card-title mb-4 " style="color: #372554;">Manage Jobs</h2>
+                    <h2 class="card-title mb-4" style="color: #372554;">Manage Jobs</h2>
                     <hr class="mt-5">
                     <h5 class="mb-4">Job Listing</h5>
                     
-                    <table class="table table-with-gap">
+                    <table class="table" >
                         <thead>
-                            <tr class="bg-black">
+                            <tr class="p-5">
                                 <th scope="col" class="text-center text-secondary">Job Title</th>
                                 <th scope="col" class="text-center text-secondary">Status</th>
                                 <th scope="col" class="text-center text-secondary">No. of Applicants</th>
@@ -87,7 +87,7 @@
                                 <td class="text-center">{{job.location}}</td>
                                 <td class="text-center">
                                     <a class="btn text-white" href="{% url 'update-job' job.pk %}" style=" background-color: #8A84E2;"><small>Update</small></a>    
-                                    <a class="btn btn-danger" href="#" ><i class="fa-solid fa-x"></i></a>
+                                    <a class="btn btn-outline-secondaryu" href="#" ><i class="fa-solid fa-x"></i></a>
                                 </td>
                             </tr>
                             {% endfor %}
