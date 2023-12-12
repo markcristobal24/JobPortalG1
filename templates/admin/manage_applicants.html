@@ -1,49 +1,163 @@
 {% extends 'base.html' %}
 
 {% block content %}
-{% if messages %}
-<div class="alert alert-{{message.tags}}" role="alert">
-    <b>{{message.0}}</b>
-</div>
-{% endif %}
-<table>
-    <thead>
-        <tr>
-            <th>Username</th>
-            <th>Email</th>
-            <th>Has Resume</th>
-            <th>Is Active</th>
-            <th>Action</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for user in users %}
-            {% if user.is_applicant %}
-                <tr>
-                    <td>{{ user.username }}</td>
-                    <td>{{ user.email }}</td>
-                    <td>{{ user.has_resume }}</td>
-                    <td>{{ user.is_active }}</td>
-                    <td>
-                        <form method="post" action="{% url 'activate_user' user.id %}">
-                            {% csrf_token %}
-                            <button class="btn btn-primary" type="submit" name="action" value="Activate">Activate</button>
-                        </form>
-                        
-                        <form method="post" action="{% url 'deactivate_user' user.id %}">
-                            {% csrf_token %}
-                            <button class="btn btn-danger" type="submit" name="action" value="Deactivate">Deactivate</button>
-                        </form>
-                        
-                        <form method="get" action="">
-                            <button class="btn btn-warning" type="submit" name="action" value="Edit">Edit</button>
-                        </form>
+    {% if messages %}
+        <div class="alert alert-{{ message.tags }}" role="alert">
+            <b>{{ message.0 }}</b>
+        </div>
+    {% endif %}
+        
+            <div class="container-fluid p-0">
+                <div class="row flex-nowrap" style="max-height: 80%;">
+                    <!-- Sidebar -->
+                    <div class="col-md-4 col-lg-3 min-vh-100 p-3 d-flex flex-column justify-content-between" style=" border-right: 2px solid #d4d4d4;">
+                        <div class="p-2">
+                            <div class="d-flex align-items-center" style="padding: 10px 10px 10px 12px; border-radius: 10px;">
+                                <div class="rounded-circle overflow-hidden me-3" style="width: 50px; height: 50px; border: 2px solid #fff;">
+                                    <img src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Profile Picture" class="w-100 h-100 object-fit-cover">
+                                </div>
+                                <div>
+                                    <a class="d-flex text-decoration-none mt-3 align-items-center">
+                                        <span class="fs-5 d-none d-sm-inline" style="color: #372554;">Welcome,</span><br>
+                                    </a>
+                                    <p style="color: #372554;">{{request.user.email}}<span>!</span></p>
+                                </div>
+                            </div>
+                            <hr>
+                            <ul class="nav nav-pills flex-column">
+                                <li class="nav-item py-2 py-sm-0 mt-3 {% if request.resolver_match and request.resolver_match.url_name == 'dashboard' %}active{% endif %}">
+                                    <a href="{% url 'dashboard' %}" class="nav-link">
+                                        <i class="fa-solid fa-gauge" style="width: 20px; height: 20px;"></i><span class="fs-6 ms-2 d-none d-sm-inline" >Dashboard</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item py-2 py-sm-0 mt-3 {% if request.resolver_match and request.resolver_match.url_name == 'manage-applicants' %}active{% endif %}">
+                                    <a href="{% url 'manage-applicants' %}" class="nav-link">
+                                        <i class="fa-solid fa-users" style="width: 20px; height: 20px;"></i><span class="fs-6 d-none ms-2 d-sm-inline">Applicants</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item py-2 py-sm-0 mt-3 {% if request.resolver_match and request.resolver_match.url_name == 'manage-recruiters' %}active{% endif %}">
+                                    <a href="{% url 'manage-recruiters' %}" class="nav-link">
+                                        <i class="fa-solid fa-user-tie" style="width: 20px; height: 20px;"></i><span class="fs-6 d-none ms-2 d-sm-inline">Recruiters</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item py-2 py-sm-0 mt-3 {% if request.resolver_match and request.resolver_match.url_name == 'admin-jobs' %}active{% endif %}">
+                                    <a href="{% url 'admin-jobs' %}" class="nav-link">
+                                        <i class="fa-solid fa-briefcase" style="width: 20px; height: 20px;"></i><span class="fs-6 d-none ms-2 d-sm-inline">Job Listing</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item py-2 py-sm-0 mt-3 {% if request.resolver_match and request.resolver_match.url_name == 'manage-reports' %}active{% endif %}">
+                                    <a href="{% url 'manage-reports' %}" class="nav-link">
+                                        <i class="fa-solid fa-file-contract" style="width: 20px; height: 20px;"></i><span class="fs-6 d-none ms-2 d-sm-inline">Reports</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- END OF SIDEBAR -->
 
-                        <button class="btn btn-info"><a href="{% url 'view_resume' user.id %}" target="_blank">View</a></button>
-                    </td>
-                </tr>
-            {% endif %}
-        {% endfor %}
-    </tbody>
-</table>
+                    <!-- MAIN CONTENT -->
+                    <div class="col-md-8 col-lg-9 p-5 mt-1">
+                        <main class="main-content">
+                            <h2 style="font-size: 30px; font-weight: bold; padding-left: 10px; color: #372554; font-weight: bold;">Manage Applicants</h2>
+                            <hr style="padding: 10px 5px;">
+                            <div class="d-flex justify-content-between align-items-center">
+                            <h2 style="font-size: 18px; font-weight: bold; padding-left: 15px;">Total Applicants: <span>23</span></h2>
+                            <form action="" class="form-inline">
+                                <div class="form-group m-2 mb-1" style="padding-right: 5px;">
+                                    <input type="search" name="search" class="form-control rounded-0" id="floatingInput" placeholder="Search Applicant">
+                                </div>
+                            </form>
+                        </div>
+                        <!-- TABLE -->
+                        <div class="container mt-3 table-container">
+                            <div class="card p-3 rounded-0">
+                                <div class="card-body">
+                                    <div class="table-responsive" style="margin: auto;">
+                                        <table class="table table-nowrap">
+                                            <thead>
+                                                <tr class="align-middle">
+                                                    <th scope="col" class="text-center">User ID</th>
+                                                    <th scope="col">Username</th>
+                                                    <th scope="col">Email</th>
+                                                    <th scope="col" class="text-center">Status</th>
+                                                    <th scope="col" class="text-center">Resume</th>
+                                                    <th scope="col" class="text-start col-xxs-1"></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for user in users %}
+                                                    {% if user.is_applicant %}
+                                                        <tr class="align-middle">
+                                                            <th scope="row" class="text-center">{{ user.id }}</th>
+                                                            <td>{{ user.username }}</td>
+                                                            <td>{{ user.email }}</td>
+                                                            <td class="text-center">
+                                                                {% if user.is_active %}
+                                                                  <span class="badge px-3 py-2" style="color: #56CDAD; border: 2px solid #56CDAD; border-radius: 20px; height: 30px; width: 90px; font-weight: bold;">Active</span>
+                                                                {% else %}
+                                                                  <span class="badge px-3 py-2" style="color: #FF6550; border: 2px solid #FF6550; border-radius: 20px; height: 30px; width: 90px; font-weight: bold;">Inactive</span>
+                                                                {% endif %}
+                                                              </td>
+                                                            <td class="text-center"><button class="btn rounded-3" style="background-color: #8A84E2;"><a href="{% url 'view_resume' user.id %}" target="_blank" style="color:white; text-decoration: none;">View Resume</a></button></td>
+                                                           
+                                                            <td class="text-start">
+                                                                <div class="dropdown">
+                                                                    <i class="bx bx-dots-horizontal-rounded text-black dropdown-toggle" style="cursor: pointer;" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+                                                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                                                                        <form class="dropdown-item" method="post" action="{% url 'activate_user' user.id %}">
+                                                                            {% csrf_token %}
+                                                                            <button class="dropdown-item bg-transparent" type="submit" name="action" value="Activate">Activate</button>
+                                                                        </form>
+                                                            
+                                                                        <form class="dropdown-item" method="post" action="{% url 'deactivate_user' user.id %}">
+                                                                            {% csrf_token %}
+                                                                            <button class="dropdown-item bg-transparent" type="submit" name="action" value="Deactivate">Deactivate</button>
+                                                                        </form>
+                                                            
+                                                                        <form class="dropdown-item" method="get" action="">
+                                                                            <button class="dropdown-item bg-transparent" type="submit" name="action" value="Edit">Edit</button>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                            
+                                                            <style>
+                                                                .dropdown-toggle::after {
+                                                                    content: none; 
+                                                                }
+                                                                .main-content {
+                                                                    max-height: 100%;
+                                                                    overflow: hidden;
+                                                                }
+
+                                                                .table-responsive {
+                                                                    max-height: 400px;
+                                                                    overflow-y: auto;
+                                                                }
+
+                                                                .table-responsive::-webkit-scrollbar {
+                                                                    overflow: hidden;
+                                                                }
+
+                                                                /* .table-container::-webkit-scrollbar-thumb {
+                                                                    background-color: #888;
+                                                                    border-radius: 4px;
+                                                                } */
+                                                            
+                                                            </style>       
+                                                        </tr>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- END OF TABLE -->
+                    </main>
+                     </div>
+                </div>
+            </div>
+
 {% endblock content %}

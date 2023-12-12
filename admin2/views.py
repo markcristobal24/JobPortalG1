@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Admin2
+from .models import ActivityLog
 from django.contrib import messages
 from users.models import User
 from job.models import Job
@@ -25,10 +25,8 @@ def manage_reports(request):
     for user in users:
         if user.is_applicant:
             applicant_count += 1
-            print("Applicant: ",user.email)
         elif user.is_recruiter:
             recruiter_count += 1
-            print("Recruiter: ",user.email)
 
     jobs = Job.objects.all()
     job_count = 0
@@ -45,9 +43,18 @@ def activate_user(request, user_id):
     user.is_active = True
     user.save()
     messages.add_message(request, messages.SUCCESS, 'User activated successfully')
+
     if user.is_applicant:
+        ActivityLog.objects.create(
+            user="Admin",
+            details=f"Admin acivated applicant {user.username}"
+        )
         return redirect('manage-applicants')
     elif user.is_recruiter:
+        ActivityLog.objects.create(
+            user="Admin",
+            details=f"Admin acivated recruiter {user.username}"
+        )
         return redirect('manage-recruiters')
 
 def deactivate_user(request, user_id):
@@ -56,8 +63,16 @@ def deactivate_user(request, user_id):
     user.save()
     messages.add_message(request, messages.SUCCESS, 'User deactivated successfully')
     if user.is_applicant:
+        ActivityLog.objects.create(
+            user="Admin",
+            details=f"Admin deacivated applicant {user.username}"
+        )
         return redirect('manage-applicants')
     elif user.is_recruiter:
+        ActivityLog.objects.create(
+            user="Admin",
+            details=f"Admin deacivated recruiter {user.username}"
+        )
         return redirect('manage-recruiters')
 
 def edit_user(request, user_id):
@@ -87,6 +102,10 @@ def activate_job(request, job_id):
     job.is_available = True
     job.save()
     messages.add_message(request, messages.SUCCESS, 'Job activated successfully')
+    ActivityLog.objects.create(
+        user="Admin",
+        details=f"Admin acivated job {job_id}"
+    )
     return redirect('admin-jobs')
 
 def deactivate_job(request, job_id):
@@ -94,4 +113,8 @@ def deactivate_job(request, job_id):
     job.is_available = False
     job.save()
     messages.add_message(request, messages.SUCCESS, 'Job deactivated successfully')
+    ActivityLog.objects.create(
+        user="Admin",
+        details=f"Admin acivated job {job_id}"
+    )
     return redirect('admin-jobs')
