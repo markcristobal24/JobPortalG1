@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from .models import Job, ApplyJob
 from .form import CreateJobForm, UpdateJobForm
@@ -81,3 +81,14 @@ def applied_jobs(request):
     jobs = ApplyJob.objects.filter(user=request.user)
     context = {'jobs':jobs}
     return render(request, 'job/applied_job.html', context)
+
+def delete_job(request, pk):
+    delete_job = get_object_or_404(Job, pk=pk)
+    try:
+        delete_job.delete()
+        messages.success(request, 'Job successfully removed.')
+        return redirect('manage-jobs')
+    except Exception as e:
+        messages.error(request, f'Error: {e}')
+    
+    return redirect('manage-jobs')
