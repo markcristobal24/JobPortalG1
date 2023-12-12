@@ -58,56 +58,120 @@
                                 <span>Summarizing role details to attract applicants</span>
             
                             </div>
-                            
-                            <div class="container px-5">
-                                <hr class="py-3">
-                                <form method="post">
-                                    {% csrf_token %}
-                                    <div class="mb-4">
-                                        <label for="exampleInputEmail" class="form-label">Job Title</label>
-                                        {% render_field form.title class="form-control p-3 rounded-3" placeholder="Enter Job title"%}
-                                    </div>
-                                    <div class="mb-4">
-                                        <label for="exampleInputEmail" class="form-label">Salary</label>
-                                        {% render_field form.salary class="form-control p-3 rounded-3" placeholder="Enter Salary" %}
-                                    </div>
-                                    <div class="row">
 
-                                        <div class="col-md-6 mb-4">
+
+                            <form method="post">
+                                {% csrf_token %}
+                                <div class="row m-5">
+                                    <hr class="mb-5">
+
+                                    <div class="col-md-4">
+                                        <h5 class="card-title mb-1" style="color: #372554;"><i class="fa-regular fa-building me-3"></i>Job Title</h5>
+                                        <span>Summarizing role details to attract applicants</span>
+                                    </div>
+                                    <div class="col-md-7 ms-3">
+                                        <div class="mb-4">
+                                            <label for="exampleInputEmail" class="form-label">Job Title</label>
+                                            {% render_field form.title class="form-control p-3 rounded-3" placeholder="Enter Job title"%}
+                                        </div> 
+                                    </div><hr class="mb-5 mt-3">
+                                    <div class="col-md-4">
+                                        <h5 class="card-title mb-1" style="color: #372554;"><i class="fa-solid fa-user-tie me-3"></i>Type of Employment</h5>
+                                        <span>You can select type of employment</span>
+                                    </div>
+                                    <div class="col-md-7 ms-3">
+                                        <div class="mb-4">
+                                            <label for="exampleInputEmail" class="form-label">Job Type</label>
+                                            {% render_field form.job_type class="form-control p-3" %}
+                                        </div>
+                                        <div class="mb-4">
+                                            <label for="exampleInputEmail" class="form-label">Salary</label>
+                                            {% render_field form.salary class="form-control p-3 rounded-3" placeholder="Enter Salary" %}
+                                        </div>
+                                        <div class="mb-4">
+                                            <label for="exampleInputEmail" class="form-label">Industry</label>
+                                            {% render_field form.industry class="form-control p-3 rounded-3" %}
+                                        </div>
+                                    </div><hr class="mb-5 mt-3">
+                                    <div class="col-md-4">
+                                        <h5 class="card-title mb-1" style="color: #372554;"><i class="fa-solid fa-earth-asia me-3"></i>Location</h5>
+                                        <span>Specify the location of the company or workplace.</span>
+                                    </div>
+                                    <div class="col-md-7 ms-3 mb-3">
+                                        <div class="mb-4">
                                             <label for="exampleInputEmail" class="form-label">City</label>
                                             {% render_field form.city class="form-control p-3 rounded-3" placeholder="Enter City" %}
                                         </div>
-                                        <div class="col-md-6 mb-4">
+                                        <div class="mb-4">
                                             <label for="exampleInputEmail" class="form-label">Country</label>
                                             {% render_field form.state class="form-control p-3 rounded-3" %}
                                         </div>
-
-
+                                    </div><hr class="py-3">
+                                    <div class="col-md-4">
+                                        <h5 class="card-title mb-1" style="color: #372554;"><i class="fa-regular fa-rectangle-list me-3"></i></i>Skills</h5>
+                                        <span>Add required skills for the job.</span>
                                     </div>
+                                    <div class="col-md-7 ms-3">
+                                        <div class="mb-4">
+                                            <label for="exampleInputEmail" class="form-label">Job Requirements</label>
+                                            {% render_field form.requirements|attr:"row:2" class="form-control p-3" placeholder="Enter job requirements" %}
+                                        </div>
+                                        <div class="mb-4">
+                                            <label for="exampleInputEmail" class="form-label">Ideal Candidate</label>
+                                            {% render_field form.ideal_candidate|attr:"row:2" class="form-control p-3" placeholder="Enter ideal candidate" %}
+                                        </div>
+                                        <div class="mb-4">
+                                            <label for="exampleInputEmail" class="form-label">Is this Job Available</label>
+                                            {% render_field form.is_available class="form-check-input" %}
+                                        </div>
+                                    </div>
+                                </div><hr class="mb-5">
+                                <div class="text-end px-5"><button type="submit" class="btn rounded-3 p-2 text-white" style="width: 150px; background-color: #372554; right: 0; bottom: 0;">Submit</button></div>
+                            </form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                            
+                            <div class="container px-5">
+                                
+                                
                                     
-                                    <div class="mb-4">
-                                        <label for="exampleInputEmail" class="form-label">Industry</label>
-                                        {% render_field form.industry class="form-control p-3 rounded-3" %}
-                                    </div>
-                                    <div class="mb-4">
-                                        <label for="exampleInputEmail" class="form-label">Job Type</label>
-                                        {% render_field form.job_type class="form-control p-3" %}
-                                    </div>
-                                    <div class="mb-4">
-                                        <label for="exampleInputEmail" class="form-label">Job Requirements</label>
-                                        {% render_field form.requirements|attr:"row:2" class="form-control p-3" placeholder="Enter job requirements" %}
-                                    </div>
-                                    <div class="mb-4">
-                                        <label for="exampleInputEmail" class="form-label">Ideal Candidate</label>
-                                        {% render_field form.ideal_candidate|attr:"row:2" class="form-control p-3" placeholder="Enter ideal candidate" %}
-                                    </div>
-                                    <div class="mb-4">
-                                        <label for="exampleInputEmail" class="form-label">Is this Job Available</label>
-                                        {% render_field form.is_available class="form-check-input" %}
-                                    </div>
+                                    
+                                    
+                                
+                                    
+                                    
+                                    
+                                    
+
+                                    
                 
-                                    <button type="submit" class="w-100 btn rounded-3 py-3 px-2 text-white" style="background-color: #372554;">Submit</button>
-                                </form>
+                                    
+                                
 
                             </div>
             
