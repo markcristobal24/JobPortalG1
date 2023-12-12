@@ -5,6 +5,7 @@ from .form import CreateJobForm, UpdateJobForm
 from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
 from users.models import User
+from admin2.models import ActivityLog
 
 @login_required
 def create_job(request):
@@ -20,6 +21,7 @@ def create_job(request):
                 applicant_emails = User.objects.filter(is_applicant=True).values_list('email', flat=True)
                 for email in applicant_emails:
                     send_mail('Jobbl: New Job Alert', '<company> has posted a new job listing. Check it out!', 'jobbl.jobalerts@gmail.com', [email], fail_silently=False)
+                
                 return redirect('dashboard')
             else:
                 messages.warning(request, 'Something went wrong')
@@ -40,6 +42,12 @@ def update_job(request, pk):
         if form.is_valid():
             form.save()
             messages.info(request, 'Your form job is updated')
+            
+            ActivityLog.objects.create(
+                user=f"User {job.user_id}",
+                details=f"User {job.user_id} updated {job.title}"
+            )
+            
             return redirect('dashboard')
         else:
             messages.warning(request, 'Something went wrong')
@@ -66,6 +74,12 @@ def apply_to_job(request, pk):
                 status = 'Pending'
             )
             messages.info(request, 'You have successfully applied! Please see dashboard')
+            
+            ActivityLog.objects.create(
+                user=f"User {request.user.id}",
+                details=f"User {request.user.id} applied to Job {job.id}"
+            )
+            
             return redirect('dashboard')
     else:
         messages.info(request, 'Please login to continue')

@@ -19,12 +19,10 @@ def dashboard(request):
             total_applicants += 1
             if user.is_active:
                 active_applicants += 1
-                print(f"Active applicant: {user.email}")
         elif user.is_recruiter:
             total_recruiters += 1
             if user.has_company:
                 active_companies += 1
-                print(f"Active companies: {user.email}")
 
     jobs = Job.objects.all()
     for job in jobs:
