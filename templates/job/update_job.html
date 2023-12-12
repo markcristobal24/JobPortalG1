@@ -57,7 +57,7 @@
             
                             <div class="mb-5 px-5 ">
             
-                                <h2 class="card-title mb-1" style="color: #372554;">Update Job</h2>
+                                <h2 class="card-title mb-1" style="color: #8A84E2;">Update Job</h2>
                                 <span>Edit your Job Listing Details</span>
             
                             </div>
@@ -132,8 +132,27 @@
                                         </div>
                                     </div>
                                 </div><hr class="mb-5">
-                                <div class="text-end px-5"><button type="submit" class="btn rounded-3 p-2 text-white" style="width: 150px; background-color: #372554; right: 0; bottom: 0;">Submit</button></div>
+                                <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content rounded-3">
+                                            <div class="modal-header">
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body text-center">
+                                            
+                                                <img src="https://drive.google.com/uc?id=1ykRVB5kX1z6uhylyJxCBiKNwtd5snL3U" alt="" style="height: 100px; width: 100px;">
+                                                <h4 class="mx-5 my-3 text-success">Confirm Modification</h4>
+                                                <small>Make sure the information is correct</small>
+
+                                            <div class="text-center px-5 mt-4 mb-3">
+                                                <button type="submit" class="btn rounded-3 p- px-5 text-white btn-success">Confirm</button>
+                                            </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </form>
+                            <div class="text-end"><button type="button" class="btn rounded-3 p-2 text-white" style="width: 150px; background-color: #372554;" data-bs-toggle="modal" data-bs-target="#updateModal">Update</button></div>
                         </div>
                     </div>
                 </div>
@@ -141,6 +160,9 @@
         </div>
     </div>
 </div>
+
+
+
 
 <script src="https://kit.fontawesome.com/e9e220f4bb.js" crossorigin="anonymous"></script>
 

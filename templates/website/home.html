@@ -4,67 +4,98 @@
 
 {% block content %}
 
-<section>
-    <div class="p-5 mb-4 bg-light rounded-3">
-        <div class="container-fluid py-5">
-            <h2 class="display-5 fw-bold">Django Jobs. Get Hired Quickly!</h2><br>
 
-            <div class="card">
-                <div class="card-body">
-                    <form class="row gy-2 gx-3 align-items-center">
-                        <div class="col-sm-2">
-                            <label  for="autoSizingInput">Name</label>
-                            {% render_field filter.form.title class="form-control" id="autoSizingInput" placeholder="Job Keyword" %}
-                        </div>
-                        <div class="col-sm-3">
-                            <label  for="autoSizingSelect">Select Location</label>
-                            {% render_field filter.form.state class="form-select" %}
-                        </div>
-                        <div class="col-sm-3">
-                            <label  for="autoSizingSelect">Choose Job Type</label>
-                            {% render_field filter.form.job_type class="form-select" %}
-                        </div>
-                        <div class="col-sm-3">
-                            <label  for="autoSizingSelect">Select Industry</label>
-                            {% render_field filter.form.industry class="form-select" %}
-                        </div>
+<div class="container">
 
-                        <div class="col-auto">
-                            <button type="submit" class="btn btn-primary">Search</button>
-                        </div>
-                    </form>
+    <section class="py-5">
+        <div class="p-5 mb-4 rounded-5" style="background-image: url('https://drive.google.com/uc?id=18MAIBEgfMRkhOI8E3BNU_CvFq_2nYRsc'); background-repeat: no-repeat; background-size: cover; height: 600px;">
+            <div class="container-fluid py-5">
+                <h2 class="display-5 fw-bold text-white">Your Dream Career <br>is <span style="color: #8A84E2;">possible</span> with us!</h2><br>
+                
+                <div class="row">
+                    <div class="col-md-8">
+                        <p class="col-md-8 fs-6 mt-2 text-white">
+                            Welcome to Django Job Portal! Search and get your dream job. We have thousands
+                            of job offering for you. Don't forget to leave a like when you get a job. Goodluck with your job
+                            hunt!
+                        </p>
+                    </div>
+                    <div class="col-md-4 text-end" >
+                        <a href="{% url 'job-listing' %}" class="rounded-5 py-2 px-3" style="font-size: 12px; text-decoration: none; background: rgb(138,132,226); background: linear-gradient(263deg, rgba(138,132,226,1) 8%, rgba(255,255,255,1) 87%); color: #372554; font-weight: bold;" type="button">EXPLORE OPPORTUNITIES</a>
+                    </div>
+                </div>
+                <div class="card mt-5 p-4 rounded-4">
+                    <div class="card-body">
+                        <form class="row gy-2 gx-3 align-items-center">
+                            <div class="col-sm-3">
+                                <label  for="autoSizingInput">Name</label>
+                                {% render_field filter.form.title class="form-control" id="autoSizingInput" placeholder="Job Keyword" %}
+                            </div>
+                            <div class="col-sm-2">
+                                <label  for="autoSizingSelect">Select Location</label>
+                                {% render_field filter.form.state class="form-select" %}
+                            </div>
+                            <div class="col-sm-2">
+                                <label  for="autoSizingSelect">Choose Job Type</label>
+                                {% render_field filter.form.job_type class="form-select" %}
+                            </div>
+                            <div class="col-sm-3">
+                                <label  for="autoSizingSelect">Select Industry</label>
+                                {% render_field filter.form.industry class="form-select" %}
+                            </div>
+    
+                            <div class="col-sm-2 mt-5 mb-1 ">
+                                <button type="submit" class="btn px-5 mp-2 text-white fw-bold" style="background-color: #8A84E2;">Search</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
-            <p class="col-md-8 fs-6 mt-3">
-                Welcome to Django Job Portal! Search and get your dream job. We have thousands
-                of job offering for you. Don't forget to leave a like when you get a job. Goodluck with your job
-                hunt!
-            </p>
-            <a href="{% url 'job-listing' %}" class="btn btn-outline-primary" type="button">More Jobs</a>
         </div>
-    </div>
-</section>
+    </section>
+    <div class="py-4 text-center">
 
-<div class="row row-cols-1 row-cols-md-3 g-4">
-    {% for job in filter.qs %}
-    <div class="col">
-        <div class="card h-100">
-            <div class="card-body">
-                <h5 class="card-title">{{job.title}}</h5>
-                <p class="card-text">Industry: {{job.industry}}</p>
-                <p class="card-text">Job Type: {{job.job_type}}</p>
-                <p class="card-text">Location: {{job.city}}, {{job.state}}</p>
-                <p class="card-text">Salary: {{job.salary}}</p>
+        <img src="https://drive.google.com/uc?id=1_-YVcRQ2VyZuQfv9JKJGKX7J9OFEdw9w" alt="image not avail" class="my-3" style="height: 100px;">
+    </div>
+    <div class="row m-4 pt-5">
+
+
+        <div class="col-sm-6"><h1 class="fw-bold" style="color: #372554;">Featured <span style="color: #8A84E2;">Jobs</span></h1></div>
+        <div class="col-sm-6"><p class="text-end m-3 pe-5 fw-bold"><a href="{% url 'job-listing' %}" style="text-decoration: none; color: #8A84E2;" class="text-end">Show all jobs</a></p></div>
+    </div>
+    <div class="row row-cols-1 row-cols-md-3 g-4 px-5 pb-5 mt-3 pt-3">
+        {% for job in filter.qs %}
+        <div class="col">
+            <div class="card h-100 rounded-3 p-3">
+                <div class="card-body">
+                    <h4 class="card-title mb-3" style="color: #25324B;">{{job.title}}</h4>
+                    <p class="card-text mb-1">{{job.city}} • {{job.state}}</p>
+                    <p class="card-text mb-3">Salary: {{job.salary}}</p>
+                    <p><span class="card-text mb-0 px-4 py-1 fw-bold" style="color: rgb(63, 143, 63); background-color: rgb(220, 250, 220); border-radius: 20px;">{{job.industry}}</span> | <span class="card-text mb-0">{{job.job_type}}</span></p>
+                    <small class="text-muted">{{job.timestamp|naturaltime}}</small>
+                </div>
             </div>
-            <div class="card-footer">
-                <small class="text-muted">{{job.timestamp|naturaltime}}</small>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="p-5 m-4 mt-5 rounded-5" style=" background-color: #372554; height:500px;" >
+        <div class="row" >
+            <div class="col-md-6">
+                    <div class="container-fluid py-5 pb-5 text-white">
+                        <h1 class="display-5 fw-bold">Welcome to <span style=" color: #8A84E2;">Jobbl</span></h1>
+                        <span class="mt-2">At Jobbl, we empower individuals by connecting them with opportunities that match their skills, passions, and aspirations. <br><br>
+                            Join us in shaping the future of work and fostering professional success.</span>
+                    </div>
+                    <a class="btn rounded-5 mt-5 py-2 px-3" href="{% url 'create-job' %}" style="background: rgb(138,132,226); background: linear-gradient(263deg, rgba(138,132,226,1) 8%, rgba(255,255,255,1) 87%); color: #372554; font-weight: bold;">Create Job Listing</a>
+            </div>
+            <div class="col-md-6">
+
+                <img src="https://drive.google.com/uc?id=1ALWxMQQ5DTRrYcTjRHLNE4OPAHil_f28" alt="">
             </div>
         </div>
     </div>
-    {% endfor %}
+
 </div>
-
-
-
 {% endblock content %}
 
