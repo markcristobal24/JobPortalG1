@@ -45,14 +45,154 @@
     
 </section>
 
+<!-- ADMIN Dashboard -->
 {% elif request.user.is_superuser %}
-<section class="container mt-5">
-    <div class="p-5 mb-4 bg-light rounded-3">
-        <div class="container-fluid py-5">
-            <h1 class="display-5 fw-bold">Welcome to Django Jobs</h1>
-            <p class="col-md-8 fs-4">Admin Dashboard</p>
+<div class="container-fluid p-0">
+    <div class="row flex-nowrap">
+        <div class="col-md-4 col-lg-3 min-vh-100 p-3 d-flex flex-column justify-content-between" style=" border-right: 2px solid #d4d4d4;">
+            <div class="p-2">
+                <div class="d-flex align-items-center" style="padding: 10px 10px 10px 12px; border-radius: 10px;">
+                    <div class="rounded-circle overflow-hidden me-3" style="width: 50px; height: 50px; border: 2px solid #fff;">
+                        <img src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Profile Picture" class="w-100 h-100 object-fit-cover">
+                    </div>
+                    <div>
+                        <a class="d-flex text-decoration-none mt-3 align-items-center">
+                            <span class="fs-5 d-none d-sm-inline" style="color: #372554;">Welcome,</span><br>
+                        </a>
+                        <p style="color: #372554;">{{request.user.email}}<span>!</span></p>
+                    </div>
+                </div>
+                <hr>
+                <ul class="nav nav-pills flex-column">
+                    <li class="nav-item py-2 py-sm-0 mt-3 {% if request.resolver_match and request.resolver_match.url_name == 'dashboard' %}active{% endif %}">
+                        <a href="{% url 'dashboard' %}" class="nav-link">
+                            <i class="fa-solid fa-gauge" style="width: 20px; height: 20px;"></i><span class="fs-6 ms-2 d-none d-sm-inline" >Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="nav-item py-2 py-sm-0 mt-3 {% if request.resolver_match and request.resolver_match.url_name == 'manage-applicants' %}active{% endif %}">
+                        <a href="{% url 'manage-applicants' %}" class="nav-link">
+                            <i class="fa-solid fa-users" style="width: 20px; height: 20px;"></i><span class="fs-6 d-none ms-2 d-sm-inline">Applicants</span>
+                        </a>
+                    </li>
+                    <li class="nav-item py-2 py-sm-0 mt-3 {% if request.resolver_match and request.resolver_match.url_name == 'manage-recruiters' %}active{% endif %}">
+                        <a href="{% url 'manage-recruiters' %}" class="nav-link">
+                            <i class="fa-solid fa-user-tie" style="width: 20px; height: 20px;"></i><span class="fs-6 d-none ms-2 d-sm-inline">Recruiters</span>
+                        </a>
+                    </li>
+                    <li class="nav-item py-2 py-sm-0 mt-3 {% if request.resolver_match and request.resolver_match.url_name == 'admin-jobs' %}active{% endif %}">
+                        <a href="{% url 'admin-jobs' %}" class="nav-link">
+                            <i class="fa-solid fa-briefcase" style="width: 20px; height: 20px;"></i><span class="fs-6 d-none ms-2 d-sm-inline">Job Listing</span>
+                        </a>
+                    </li>
+                    <li class="nav-item py-2 py-sm-0 mt-3 {% if request.resolver_match and request.resolver_match.url_name == 'manage-reports' %}active{% endif %}">
+                        <a href="{% url 'manage-reports' %}" class="nav-link">
+                            <i class="fa-solid fa-file-contract" style="width: 20px; height: 20px;"></i><span class="fs-6 d-none ms-2 d-sm-inline">Reports</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            
+    
         </div>
+    <!-- main section -->
+     <div class="col-md-8 col-lg-9 p-5 mt-3">
+        <main class="main-content">
+            <h2 style="font-size: 28px;font-weight: 600; padding-left: 10px; color:#372554; font-weight: bold;">Dashboard</h2>
+
+            <!-- Active Users [applicats, recruiters, av jobs] -->
+            <div class="info-data">
+                <div class="card">
+                    <div class="head">
+                        <div class="circle-icon">
+                            <i class="fa-regular fa-user" style="color: white;font-size: 24px;"></i>
+                        </div>
+                        <div style="padding-top: 20px;">
+                            <h2 style="font-weight: bold;">{{ active_applicants }}</h2>
+                            <p>Active Applicants</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="head">
+                        <div class="circle-icon">
+                            <i class="fa-regular fa-building" style="color: white;font-size: 24px;"></i>
+                        </div>
+                        <div style="padding-top: 20px;">
+                            <h2 style="font-weight: bold;">{{ active_companies }}</h2>
+                            <p>Active Companies</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="head">
+                        <div class="circle-icon">
+                            <i class='bx bx-briefcase' style="color: white;font-size: 24px;"></i>
+                        </div>
+                        <div style="padding-top: 20px;">
+                            <h2 style="font-weight: bold;">{{ available_jobs }}</h2>
+                            <p>Available Jobs</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reports -->
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-8 col-lg-9 mt-4" style="max-width: 665px; padding: 0px;">
+                        <div class="card p-3 rounded-3">
+                            <div class="card-body">
+                                <div class="table-responsive" style="margin: auto;">
+                                    <table class="table table-nowrap">
+                                        <thead>
+                                            <tr class="align-middle">
+                                                <th scope="col" class="text-center fw-medium">Total Applicants</th>
+                                                <th scope="col" class="text-center fw-medium">Total Recruiters</th>
+                                                <th scope="col" class="text-center fw-medium">Total Job Listings</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="align-middle" style="height: 130px;">
+                                                <td class="text-center fs-1 fw-bold">{{ total_applicants }}</td>
+                                                <td class="text-center fs-1 fw-bold">{{ total_recruiters }}</td>
+                                                <td class="text-center fs-1 fw-bold">{{ total_jobs }}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            
+                   <!-- Activity Logs -->
+                    <div class="col-md-4 col-lg-3 mt-4" style="margin-left: 8px;">
+                        <div class="card text-bg-light mb-3" style="width: 320px; height: 253px; overflow: auto;">
+                            <div class="card-header fw-bold">Activity Logs</div>
+                            <div class="card-body bg-white" style="height: 150px;">
+                                <table class="table table-nowrap">
+                                    <thead>
+                                        <tr class="align-middle">
+                                            <th scope="col" class="text-center">Time</th>
+                                            <th scope="col" class="text-center">Activity</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for log in logs reversed %}
+                                        <tr class="align-middle">
+                                            <td class="text-center fw-bold">{{ log.timestamp }}</td>
+                                            <td class="text-center">{{ log.details }}</td>
+                                        </tr>
+                                        {% endfor %}
+                                    
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>           
+            </div>
+        </main>
+         </div>
     </div>
-</section>
+</div>
 {% endif %}
 {% endblock content %}

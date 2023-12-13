@@ -6,6 +6,7 @@ from .form import RegisterUserForm, ChangePasswordForm
 from resume.models import Resume
 from company.models import Company
 from django.contrib.auth.decorators import login_required
+from admin2.models import ActivityLog
 
 # Create your views here.
 def register_applicant(request):
@@ -17,6 +18,12 @@ def register_applicant(request):
             var.save()
             Resume.objects.create(user=var)
             messages.info(request, 'Your account has been created.')
+            
+            ActivityLog.objects.create(
+                user=f"User {var.id}",
+                details=f"User {var.id} created an applicant account"
+            )
+
             return redirect('login')
         else:
             messages.warning(request, 'Something went wrong')
@@ -36,6 +43,12 @@ def register_recruiter(request):
             var.save()
             Company.objects.create(user=var)
             messages.info(request, 'Your account has been created.')
+            
+            ActivityLog.objects.create(
+                user=f"User {var.id}",
+                details=f"User {var.id} created a recruiter account"
+            )
+            
             return redirect('login')
 
         else:
@@ -55,6 +68,13 @@ def login_user(request):
         user = authenticate(request, username = email, password=password)
         if user is not None and user.is_active:
             login(request, user)
+
+            if user.is_superuser is not True:
+                ActivityLog.objects.create(
+                    user=f"User {user.id}",
+                    details=f"User {user.id} logged in"
+                )
+
             return redirect('dashboard')
         else:
             messages.warning(request, 'Something went wrong')
@@ -65,6 +85,7 @@ def login_user(request):
 def logout_user(request):
     logout(request)
     messages.info(request, 'Your session has ended.')
+    
     return redirect('login')
 
 @login_required
