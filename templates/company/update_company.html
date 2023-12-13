@@ -32,7 +32,6 @@
                     </div>
 
 
-
                     <div class="mb-3">
                         <label for="exampleInputEmail" class="form-label">Company Name</label>
                         {% render_field form.name class="form-control p-3 rounded-3 required" %}
@@ -58,7 +57,7 @@
     </div>
 </div>
 
-</script>
+
 
 
 <script>
@@ -80,7 +79,7 @@
     }
 
     // Event listener for file input change
-    document.getElementById('imageInput').addEventListener('change', function () {
+    document.getElementById('id_company_logo').addEventListener('change', function () {
         previewImage(this);
     });
 </script>
