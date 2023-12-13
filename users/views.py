@@ -121,5 +121,14 @@ def applicant_profile(request):
     return render(request, 'users/applicant_profile.html')   
 
 def applicant_change_pass(request):
-    return render(request, 'users/applicant_change_pass.html')         
+    return render(request, 'users/applicant_change_pass.html')   
+
+def recruit_change_pass(request):
+    return render(request, 'company/recruit_change_pass.html')      
+
+
+def recruit_change_profile(request):
+    return render(request, 'company/recruit_change_profile.html') 
+
+
 
