@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -46,6 +47,24 @@
             background-color: #fcfcfc; /* Change to the desired hover background color */
             color: #000000; 
         }
+        .password_requirements {
+    max-height: 0;
+    transition: max-height 0.6s ease-out;
+    overflow: hidden;
+    margin-left: 30px;
+  }
+  .password_requirements h6 {
+    font-size: 0.9em;
+    margin-top: -6px;
+  }
+  .password_requirements #length_con {
+    margin-top: 0px !important;
+  }
+
+  .password_requirement_active {
+    max-height: 300px;
+    transition: max-height 0.6s ease-in;
+  }
         
     </style>
 </head>
@@ -96,5 +115,7 @@
     </div>
 
     <script src="https://kit.fontawesome.com/e9e220f4bb.js" crossorigin="anonymous"></script>
+    
+    
 </body>
 </html>
