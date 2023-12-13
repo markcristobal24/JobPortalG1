@@ -14,7 +14,7 @@
 
                 </div>
 
-                <form method="post">
+                <form method="post" enctype="multipart/form-data">
                     {% csrf_token %}
 
 
@@ -23,7 +23,7 @@
                         <img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png" alt="Image Preview" class="img-fluid m-5" id="imagePreview" style="height: 250px; width: 250px; border: 1px solid; border-color: rgb(206, 206, 206); border-radius: 30px;">
                     </div>
                     <div class="input-group mb-3"> <!-- IMAGE INPUT -->
-                        <input type="file" class="form-control p-3 rounded-3 required" id="imageInput" accept="image/*">
+                        {% render_field form.company_logo class="form-control p-3 rounded-3 required" %} 
                         <label for="imageInput" class="input-group-text">Choose Image:</label>
                     </div>
                     <div class="mb-3"> <!-- bago -->
