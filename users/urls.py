@@ -8,8 +8,12 @@ urlpatterns = [
     path('logout/', views.logout_user, name='logout'),
     path('applicant-profile/', views.applicant_profile, name='applicant-profile'),
     path('applicant-change-pass/', views.applicant_change_pass, name='applicant-change-pass'),
+
+    path('delete-account', views.delete_account, name='delete-account'),
+
     path('recruit-change-pass/', views.recruit_change_pass, name='recruit-change-pass'),
     path('recruit-change-profile/', views.recruit_change_profile, name='recruit-change-profile'),
     
+
 
 ]

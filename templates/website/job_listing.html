@@ -3,39 +3,59 @@
 
 {% block content %}
 
-<section>
-    <div class="p-5 mb-4 bg-light rounded-3">
-        <div class="container-fluid py-5">
-            <h2 class="display-5 fw-bold">Django Jobs. Get Hired Quickly</h2>
-            <p class="col-md-8 fs-5 mt-3">
-                All Available Jobs
-            </p>
+<div class="container">
+    <div class="container">
+        <section class="py-5">
+            <div class="p-4  rounded-5" style="background-image: url('https://drive.google.com/uc?id=18MAIBEgfMRkhOI8E3BNU_CvFq_2nYRsc'); background-repeat: no-repeat; background-size: cover;">
+                <div class="container-fluid py-5">
+                    <h2 class="display-5 fw-bold text-center text-white"><span style="color: #8A84E2;">Job Opportunities </span>is possible</span> with us!</h2>
+                        <p class="text-center fs-5 mt-3 text-white">
+                            We have thousands of job offering for you!
+                        </p>
+                </div>
+            </div>
+        </section>
+    
+    </div>
+    
+    <div class="container">
+        <div class="row m-4 ">
+            <div class="col-sm-6"><h1 class="fw-bold" style="color: #372554;">Featured <span style="color: #8A84E2;">Jobs</span></h1></div>
+            <div class="col-sm-6"><p class="text-end m-3 pe-5 fw-bold"><a href="{% url 'job-listing' %}" style="text-decoration: none; color: #8A84E2;" class="text-end">Show all jobs</a></p></div>
         </div>
     </div>
-</section>
+    
+    <div class="container p-4">
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            {% if jobs %}
+            {% for job in jobs %}
+            <div class="col">
+                <div class="card h-100 p-3 rounded-3">
+                    <div class="card-body">
+                        <h2 class="fw-bold">{{job.title}}</h2>
+                        <p class="card-text mt-3">{{job.city}}</p>
+                        <p class="card-text ">Salary: {{job.salary|intcomma}}</p>
+                        <p class="card-text mb-2">{{job.company.name}}</p>
+                    </div>
+                    
+                    <div class="px-3">
+                        <small class="text-muted">Created {{job.timestamp|naturaltime}}</small>
+                    </div>
 
-<div class="row row-cols-1 row-cols-md-3 g-4">
-    {% if jobs %}
-    {% for job in jobs %}
-    <div class="col">
-        <div class="card h-100">
-            <div class="card-body">
-                <h5 class="card-title">{{job.title}}</h5>
-                <p class="card-text">Job Location: {{job.city}}</p>
-                <p class="card-text">{{job.salary|intcomma}}</p>
-                <p class="card-text">Posted by: {{job.company.name}}</p>
-                <a class="btn btn-primary btn-sm" href="{% url 'job-details' job.pk%}">View Details</a>
+                    <div class="text-end pt-2">
+                        <a class="btn btn-md mb-3 p-2 fw-bold" style="background-color: #8A84E2; color: rgb(255, 255, 255);" href="{% url 'job-details' job.pk%}">View Details</a>
+                    </div>
+                    
+                </div>
             </div>
-            
-            <div class="card-footer">
-                <small class="text-muted">Created {{job.timestamp|naturaltime}}</small>
-            </div>
-            
+            {% endfor %}
+            {% endif %}
         </div>
+        
     </div>
-    {% endfor %}
-    {% endif %}
+    
+
 </div>
-<br>
+
 
 {% endblock content %}

@@ -118,10 +118,37 @@ def change_password(request):
 
 #new function sa may applicant
 def applicant_profile(request):
+    
     return render(request, 'users/applicant_profile.html')   
 
 def applicant_change_pass(request):
-    return render(request, 'users/applicant_change_pass.html')   
+
+    if request.method == 'POST':
+        form = ChangePasswordForm(request.POST)
+        if form.is_valid():
+            current_password = form.cleaned_data['current_password']
+            new_password = form.cleaned_data['new_password']
+            confirm_password = form.cleaned_data['confirm_password']
+            if new_password != confirm_password:
+                messages.warning(request, "New passwords do not match.")
+                #return redirect here
+            
+            elif not request.user.check_password(current_password):
+                messages.warning(request, "Current password is incorrect.")
+                #return redirect here
+            else:
+                request.user.set_password(new_password)
+                request.user.save()
+
+                update_session_auth_hash(request, request.user)
+
+                messages.success(request, "Password successfully changed.")
+                return redirect('dashboard')
+        else:
+            form = ChangePasswordForm()
+    form = ChangePasswordForm()
+    return render(request, 'users/applicant_change_pass.html', {'form': form})         
+  
 
 def recruit_change_pass(request):
     return render(request, 'company/recruit_change_pass.html')      
@@ -131,4 +158,13 @@ def recruit_change_profile(request):
     return render(request, 'company/recruit_change_profile.html') 
 
 
+            
 
+@login_required
+def delete_account(request):
+    if request.user.is_authenticated:
+        user = request.user
+        user.delete()
+
+        return redirect('login')
+    return redirect('login')

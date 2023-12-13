@@ -181,6 +181,25 @@
         transition: all 0.5s ease-out;
         color: #ffffff;
         }
+        .password_requirements {
+    max-height: 0;
+    transition: max-height 0.6s ease-out;
+    overflow: hidden;
+    margin-left: 30px;
+  }
+
+        .password_requirements h6 {
+    font-size: 0.9em;
+    margin-top: -6px;
+  }
+  .password_requirements #length_con {
+    margin-top: 0px !important;
+  }
+
+  .password_requirement_active {
+    max-height: 300px;
+    transition: max-height 0.6s ease-in;
+  }
 
         /* bagong btn */
         .btn-donate {
@@ -218,6 +237,7 @@
                 transition: linear;
             }
             }
+            
 
                 #delbtn {
                 width: 160px;
@@ -320,9 +340,7 @@
                         </li>
                         {% endif %}
                         
-                        <li class="nav-item">
-                            <a class="nav-link disabled mx-5" href="" tabindex="-1" aria-disabled="true">{{request.user.email}}</a>
-                        </li>
+                        <!-- TINANGGAL EMAIL-->
                     </ul>
 
 
@@ -406,7 +424,7 @@
             {% endblock content %}
         </div>
 
-       <div class="modal fade" id="modalLogOut" aria-hidden="true">
+    <div class="modal fade" id="modalLogOut" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">

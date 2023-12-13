@@ -8,14 +8,28 @@
     <b>You have not created a resume yet.<a href="{% url 'update-resume' %}">Create one</a></b>
 </div>
 {% endif %}
+
 <section class="container mt-5">
-    <div class="p-5 mb-4 bg-light rounded-3">
-        <div class="container-fluid py-5">
-            <h1 class="display-5 fw-bold">Welcome to Jobbl</h1>
-            <p class="col-md-8 fs-4">Applicant Dashboard</p>
+
+    <div class="p-5 m-4 rounded-5" style=" background-color: #372554; height:500px;" >
+        <div class="row" >
+            <div class="col-md-6">
+                    <div class="container-fluid py-5 pb-5 text-white">
+                        <h1 class="display-5 fw-bold text-white">Welcome to <span style=" color: #8A84E2;">Jobbl</span></h1>
+                        <span class="mt-2">At Jobbl, we empower individuals by connecting them with opportunities that match their skills, passions, and aspirations. <br><br>
+                            Join us in shaping the future of work and fostering professional success.</span>
+                    </div>
+                    <a class="btn rounded-3 mt-5 py-2 px-3" href="{% url 'job-listing' %}" style="background: rgb(138,132,226); background: linear-gradient(263deg, rgba(138,132,226,1) 8%, rgba(255,255,255,1) 87%); color: #372554; font-weight: bold;">Explore Jobs</a>
+            </div>
+            <div class="col-md-6">
+
+                <img src="https://drive.google.com/uc?id=1ALWxMQQ5DTRrYcTjRHLNE4OPAHil_f28" alt="">
+            </div>
         </div>
     </div>
+    
 </section>
+
 {% elif request.user.is_recruiter %}
 {% if not request.user.has_company %}
 <div class="alert alert-danger" role="alert">
