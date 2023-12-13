@@ -115,17 +115,17 @@
                                                                         </form>
                                                             
                                                                         <form id="edit-opt" class="dropdown-item" method="get" action="">
-                                                                            <button class="dropdown-item bg-transparent" type="button" name="action" value="Edit" data-bs-toggle="modal" data-bs-target="#editModal">Edit</button>
+                                                                            <button class="dropdown-item bg-transparent" type="button" name="action" value="Edit" data-bs-toggle="modal" data-bs-target="#editModal{{ user.username }}">Edit</button>
                                                                         </form>
                                                                         <form id="delete-opt" class="dropdown-item" method="get" action="">
-                                                                            <button class="dropdown-item bg-transparent" type="button" name="action" value="Delete" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</button>
+                                                                            <button class="dropdown-item bg-transparent" type="button" name="action" value="Delete" data-bs-toggle="modal" data-bs-target="#deleteModal{{ user.id }}">Delete</button>
                                                                         </form>
                                                                         
                                                                     </div>
                                                                 </div>
                                                             </td>
                                                             <!-- DELETE MODAL -->
-                                                            <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                                                            <div class="modal fade" id="deleteModal{{ user.id }}" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog modal-dialog-centered">
                                                                     <div class="modal-content rounded-3">
                                                                         <div class="modal-header">
@@ -135,10 +135,11 @@
                                                                             <img src="https://drive.google.com/uc?id=1ui9e-7W1nVEzlVg_gsK6GdrKSxc28Jp-" alt="" style="height: 100px; width: 100px;">
                                                                             <h4 class="mx-5 my-3 text-danger">Delete Applicant</h4>
                                                                             <small>Are you sure you want to delete this applicant?</small>
-                                                            
-                                                                            <div class="text-center px-5 mt-4 mb-3">
-                                                                                <button type="button" class="btn rounded-3 p- px-5 text-white btn-danger" onclick="confirmDelete()">Confirm</button>
-                                                                            </div>
+                                                                            <form id="del{{ user.id }}" method="get" action="{% url 'delete_user' user.id %}"></form>
+                                                                                <div class="text-center px-5 mt-4 mb-3">
+                                                                                    <button form="del{{ user.id }}" type="submit" class="btn rounded-3 p- px-5 text-white btn-danger" onclick="confirmDelete()">Confirm</button>
+                                                                                </div>
+                                                                            </form>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -164,7 +165,7 @@
                                                                 </div>
                                                             </div> -->
 
-                                                            <div class="modal" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true" role="dialog">
+                                                            <div class="modal" id="editModal{{ user.username }}" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true" role="dialog">
                                                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                                                   <div class="modal-content">
                                                                     <div class="modal-header rounded-3">
@@ -173,25 +174,26 @@
                                                                         <span aria-hidden="true">&times;</span>
                                                                       </button>
                                                                     </div>
-                                                                    <div class="modal-body p-5">
-                                                                        <form>
-                                                                            <div class="form-group">
-                                                                              <label for="edit-username">Username</label>
-                                                                              <input type="email" class="form-control" id="edit-username" aria-describedby="edit-username" required>
-                                                                            </div>
-                                                                            <div class="form-group mt-3">
-                                                                              <label for="exampleInputPassword1">Email Address</label>
-                                                                              <input type="email" id="edit-email" class="form-control" id="edit-email" required>
-                                                                            </div>
-                                                                          </form>
-                                                                    </div>
-                                                                    <div class="modal-footer">
-                                                                      <button type="button" class="btn" style="background-color: #8A84E2; color: #ffffff;" onclick="saveChanges()">Save changes</button>
-                                                                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                                    </div>
+                                                                    <form id="{{ user.id }}" method="get" action="{% url 'edit_user' user.id %}"></form>
+                                                                        <div class="modal-body p-5">
+                                                                                <div class="form-group">
+                                                                                    <label for="edit-username">Username</label>
+                                                                                    <input form="{{ user.id }}" name="username{{ user.id }}" type="text" class="form-control" id="edit-username" aria-describedby="edit-username" value="{{ user.username }}" required>
+                                                                                </div>
+                                                                                <div class="form-group mt-3">
+                                                                                    <label for="exampleInputPassword1">Email Address</label>
+                                                                                    <input form="{{ user.id }}" name="email{{ user.id }}" type="email" id="edit-email" class="form-control" id="edit-email" value="{{ user.email }}" required>
+                                                                                </div>
+                                                                            
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                        <button form="{{ user.id }}" type="submit" class="btn" style="background-color: #8A84E2; color: #ffffff;">Save changes</button>
+                                                                        <button form="{{ user.id }}" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                        </div>
+                                                                    </form>
                                                                   </div>
                                                                 </div>
-                                                              </div>
+                                                            </div>
                                                             <style>
                                                                 .dropdown-toggle::after {
                                                                     content: none; 

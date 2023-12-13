@@ -30,23 +30,25 @@
             {% if jobs %}
             {% for job in jobs %}
             <div class="col">
-                <div class="card h-100 p-3 rounded-3">
-                    <div class="card-body">
-                        <h2 class="fw-bold">{{job.title}}</h2>
-                        <p class="card-text mt-3">{{job.city}}</p>
-                        <p class="card-text ">Salary: {{job.salary|intcomma}}</p>
-                        <p class="card-text mb-2">{{job.company.name}}</p>
-                    </div>
-                    
-                    <div class="px-3">
-                        <small class="text-muted">Created {{job.timestamp|naturaltime}}</small>
-                    </div>
+                    <div class="card h-100 p-3 rounded-3">
+                        <img src="https://drive.google.com/uc?id=18MAIBEgfMRkhOI8E3BNU_CvFq_2nYRsc" class="img-fluid" style="max-width: fit-content; max-height: fit-content;" alt="Responsive image"> <!-- DITO LOGO NG COMPANY-->
+                        <div class="card-body">
+                            <h2 class="fw-bold">{{job.title}}</h2>
+                            <p class="card-text mt-3">{{job.city}}</p>
+                            <p class="card-text ">Salary: {{job.salary|intcomma}}</p>
+                            <p class="card-text mb-2">{{job.company.name}}</p>
+                        </div>
+                        
+                        <div class="px-3">
+                            <small class="text-muted">Created {{job.timestamp|naturaltime}}</small>
+                        </div>
 
-                    <div class="text-end pt-2">
-                        <a class="btn btn-md mb-3 p-2 fw-bold" style="background-color: #8A84E2; color: rgb(255, 255, 255);" href="{% url 'job-details' job.pk%}">View Details</a>
+                        <div class="text-end pt-2">
+                            <a class="btn btn-md mb-3 p-2 fw-bold" style="background-color: #8A84E2; color: rgb(255, 255, 255);" href="{% url 'job-details' job.pk%}">View Details</a>
+                        </div>
+                        
                     </div>
-                    
-                </div>
+                
             </div>
             {% endfor %}
             {% endif %}

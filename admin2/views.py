@@ -145,3 +145,60 @@ def deactivate_job(request, job_id):
         return redirect('admin-jobs')
     elif request.user.is_authenticated:
         return redirect('dashboard')
+
+def edit_user(request, user_id):
+    if request.user.is_authenticated and request.user.is_superuser:
+        user = User.objects.get(pk=user_id)
+        if request.method == 'GET':
+            user.username = request.GET.get(f"username{user_id}")
+            user.email = request.GET.get(f"email{user_id}")
+            user.save()
+            messages.add_message(request, messages.SUCCESS, 'Updated user successfully')
+            ActivityLog.objects.create(
+                user="Admin",
+                details=f"Admin edited User {user_id}"
+            )
+            if user.is_applicant:
+                return redirect('manage-applicants')
+            elif user.is_recruiter:
+                return redirect('manage-recruiters')
+    elif request.user.is_authenticated:
+        return redirect('dashboard')
+    
+def edit_job(request, job_id):
+    if request.user.is_authenticated and request.user.is_superuser:
+        job = Job.objects.get(pk=job_id)
+        if request.method == 'GET':
+            job.company.name = request.GET.get(f"company_name{job_id}")
+            job.title = request.GET.get(f"job_title{job_id}")
+            job.save()
+            messages.add_message(request, messages.SUCCESS, 'Updated job successfully')
+            ActivityLog.objects.create(
+                user="Admin",
+                details=f"Admin edited Job {job_id}"
+            )
+
+            return redirect('admin-jobs')
+
+    elif request.user.is_authenticated:
+        return redirect('dashboard')
+
+def delete_user(request, user_id):
+    if request.user.is_authenticated and request.user.is_superuser:
+        user = User.objects.get(pk=user_id)
+        if user.is_applicant:
+            user.delete()
+            return redirect('manage-applicants')
+        elif user.is_recruiter:
+            user.delete()
+            return redirect('manage-recruiters')
+    elif request.user.is_authenticated:
+        return redirect('dashboard')
+    
+def delete_job(request, job_id):
+    if request.user.is_authenticated and request.user.is_superuser:
+        job = Job.objects.get(pk=job_id)
+        job.delete()
+        return redirect('admin-jobs')
+    elif request.user.is_authenticated:
+        return redirect('dashboard')

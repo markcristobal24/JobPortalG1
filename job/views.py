@@ -58,8 +58,6 @@ def update_job(request, pk):
 
 @login_required    
 def manage_jobs(request):
-
-
     jobs = Job.objects.filter(user=request.user, company=request.user.company)
     context = {'jobs':jobs}
     return render(request, 'job/manage_jobs.html', context)
