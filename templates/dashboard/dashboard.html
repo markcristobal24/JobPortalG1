@@ -151,9 +151,9 @@
             </div>
 
             <!-- Reports -->
-            <div class="container-fluid">
+            
                 <div class="row">
-                    <div class="col-md-8 col-lg-9 mt-4" style="max-width: 665px; padding: 0px;">
+                    <div class="col-md-7 mt-4">
                         <div class="card p-3 rounded-3">
                             <div class="card-body">
                                 <div class="table-responsive" style="margin: auto;">
@@ -179,21 +179,21 @@
                     </div>
             
                    <!-- Activity Logs -->
-                    <div class="col-md-4 col-lg-3 mt-4" style="margin-left: 8px;">
-                        <div class="card text-bg-light mb-3" style="width: 320px; height: 253px; overflow: auto;">
+                    <div class="col-md-5 mt-4">
+                        <div class="card text-bg-light mb-3" style=" height: 253px; overflow: auto;">
                             <div class="card-header fw-bold">Activity Logs</div>
                             <div class="card-body bg-white" style="height: 150px;">
                                 <table class="table table-nowrap">
                                     <thead>
                                         <tr class="align-middle">
-                                            <th scope="col" class="text-center">Time</th>
+                                            <th scope="col">Time</th>
                                             <th scope="col" class="text-center">Activity</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         {% for log in logs reversed %}
                                         <tr class="align-middle">
-                                            <td class="text-center fw-bold">{{ log.timestamp }}</td>
+                                            <td class=" fw-bold">{{ log.timestamp }}</td>
                                             <td class="text-center">{{ log.details }}</td>
                                         </tr>
                                         {% endfor %}
@@ -203,7 +203,7 @@
                             </div>
                         </div>
                     </div>           
-            </div>
+            
         </main>
          </div>
     </div>
