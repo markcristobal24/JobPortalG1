@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate , login, logout, update_session_auth_hash
 from .models import User
 from .form import RegisterUserForm, ChangePasswordForm
-from .form import EditCompanyForm
+from .form import EditCompanyForm, EditApplicantForm
 from resume.models import Resume
 from company.models import Company
 from django.contrib.auth.decorators import login_required
@@ -204,7 +204,25 @@ def recruit_change_profile(request):
     else:
         return redirect('dashboard') 
 
-
+def applicant_change_profile(request):
+    if request.user.is_applicant:
+        resume = Resume.objects.get(user=request.user)
+        if request.method == "POST":
+            form = EditApplicantForm(request.POST, request.FILES, instance=resume)
+            if form.is_valid():
+                # var = form.save(commit=False)
+                form.save()
+                messages.info(request, 'Your info has been updated!')
+                return redirect('dashboard')
+            else:
+                 print(form.errors)
+                 messages.warning(request, 'Something went wrong')
+        else:
+            form = EditApplicantForm(instance=resume)
+            context = {'form':form}
+            return render(request, 'company/recruit_change_profile.html', context)
+    else:
+        return redirect('dashboard') 
             
 
 @login_required
