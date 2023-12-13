@@ -65,7 +65,7 @@ def login_user(request):
         email = request.POST.get('email')
         password = request.POST.get('password')
 
-        user = authenticate(request, username = email, password=password)
+        user = authenticate(username = email, password=password)
         if user is not None and user.is_active:
             login(request, user)
 
@@ -76,8 +76,8 @@ def login_user(request):
                 )
 
             return redirect('dashboard')
-        else:
-            messages.warning(request, 'Something went wrong')
+        elif user is None:
+            messages.warning(request, 'Invalid email or password')
             return redirect('login')
     else:
         return render(request, 'users/login.html')
@@ -115,3 +115,11 @@ def change_password(request):
         else:
             form = ChangePasswordForm()
         #return render here
+
+#new function sa may applicant
+def applicant_profile(request):
+    return render(request, 'users/applicant_profile.html')   
+
+def applicant_change_pass(request):
+    return render(request, 'users/applicant_change_pass.html')         
+

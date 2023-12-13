@@ -2,39 +2,131 @@
 {% load widget_tweaks %}
 
 {% block content %}
-<div class="row">
-    <div class="col-md-6">
-        <div class="card mx-auto" style="width: 40rem;">
-            <div class="car-body">
-                <h5 class="card-title mb-3">Create a Resume</h5>
+<div class="container-fluid p-0 " style="background-color: #F1F3F8;">
+    <div class="row flex-nowrap">
 
-                <form method="post" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    <div class="mb-3">
-                        <label for="exampleInputEmail" class="form-label">First Name</label>
-                        {% render_field form.first_name class="form-control" %}
-                    </div>
-                    <div class="mb-3">
-                        <label for="exampleInputEmail" class="form-label">Surname</label>
-                        {% render_field form.surname class="form-control" %}
-                    </div>
-                    <div class="mb-3">
-                        <label for="exampleInputEmail" class="form-label">Location</label>
-                        {% render_field form.location class="form-control" %}
-                    </div>
-                    <div class="mb-3">
-                        <label for="exampleInputEmail" class="form-label">Job Title</label>
-                        {% render_field form.job_title class="form-control" %}
-                    </div>
-                    <div class="mb-3">
-                        <label for="exampleInputEmail" class="form-label">Upload Resume</label>
-                        {% render_field form.upload_resume class="form-control" %}
-                    </div>
+        <!--  SIDE BAR   -->
+        <div class="col-md-3 min-vh-100 px-5 py-3 d-flex flex-column" style=" border-right: 2px solid #d4d4d4; ">
+            <div class="d-flex align-items-center" style="border-radius: 10px;">
+                <div class="rounded-circle overflow-hidden me-3" style="width: 50px; height: 50px; border: 2px solid #fff;">
+                    <!-- Dito malalagay image ng company-->
+                    <img src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Profile Picture" class="w-100 h-100 object-fit-cover">
+                </div>
+                <div>
+                    <a class="d-flex text-decoration-none mt-3 align-items-center">
+                        <span class="fs-5 d-none d-sm-inline" style="color: #372554;">Welcome,</span><br>
+                    </a>
+                    <p style="color: #372554;">{{request.user.email}}<span>!</span></p>
+                </div>
+            </div>
+            <hr>
+            <ul class="nav nav-pills flex-column">
+                <li class="nav-item my-2 py-sm-0 mt-3">
+                    <a href="{% url 'applied-jobs' %}" class="nav-link"> 
+                        <i class="fa-solid fa-file-contract" style="width: 20px; height: 20px;"></i><span class="fs-6 ms-2 d-none d-sm-inline" >Job Applications</span>
+                    </a>
+                </li>
+                <li class="nav-item my-2 py-sm-0">
+                    <a href="{% url 'update-resume' %}" class="nav-link fw-bold" style="background-color:  #E9EBFD; color: #372554;" >
+                        <i class="fa-solid fa-file-edit" style="width: 20px; height: 20px;"></i><span class="fs-6 d-none ms-2 d-sm-inline">Create Resume</span>
+                    </a>
+                </li>
+                <hr>
+                <p class="ms-3 py-2">Setting</p>
+                <li class="nav-item my-2 py-sm-0">
+                    <a href="{% url 'applicant-profile' %}" class="nav-link"><!-- NEW PAGE TO -->
+                        <i class="fa-solid fa-user-tie" style="width: 20px; height: 20px;"></i><span class="fs-6 d-none ms-2 d-sm-inline">My Profile</span>
+                    </a>
+                </li>
+                <li class="nav-item my-2 py-sm-0">
+                    <a href="{% url 'applicant-change-pass' %}" class="nav-link" >
+                        <i class="fa-solid fa-lock" style="width: 20px; height: 20px;"></i><span class="fs-6 d-none ms-2 d-sm-inline">Change Password</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
 
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </form>
+        <!-- DITO YUNG RESUME -->
+
+        <div>
+            <div class="col-md-8 mx-5">
+                <div class="p-5" >
+                    <div class="">
+                        <h1 class="mt-2 fw-bold"style="color: #8A84E2;">Create a Resume</h1>
+                        <p class="fs-6 mt-3">Your skills show clients what you can offer, and help us choose which jobs to recommend to you. </p>
+                        <hr class="mt-5 mb-5"> 
+                        <form method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+        
+                            <!-- <div class="row mt-3">  NILIPAT SA MAY APPLICANT PROFILE
+                                <div class="col mb-4">
+                                    <label for="exampleInputEmail" class="form-label fs-5">First Name</label>
+                                    {% render_field form.first_name class="form-control p-3 rounded-3" %}
+                                </div>
+                                <div class="col mb-4">
+                                    <label for="exampleInputEmail" class="form-label  fs-5">Last Name</label>
+                                    {% render_field form.surname class="form-control p-3 rounded-3" %}
+                                </div>
+                            </div> -->
+                           
+                            <div class="mb-4 px-5">
+                                <label for="exampleInputEmail" class="form-label  fs-5">Your Skills</label> <!-- New Field -->
+                                <select class="form-select p-3 rounded-3" aria-label="Default select example">
+                                    <option selected>Select Applicable Skills</option>
+                                    <option value="1">Active Listening</option>
+                                    <option value="2">Critical Thinking</option>
+                                    <option value="3">Creativity</option>
+                                    <option value="4">Communication</option>
+                                    <option value="5">Project Management</option>
+                                    <option value="6">Leadership</option>
+                                   <!-- {% render_field form.job_skills class="form-control" %}  |  KUKUNIN PA SA MODELS --> 
+                                </select> 
+                            </div>
+                            <div class="mb-4 px-5">
+                                <label for="exampleInputEmail" class="form-label  fs-5">Job Title</label>
+                                {% render_field form.job_title class="form-select p-3 rounded-3" %}
+                            </div>
+                            <!--<div class="row mb-4">  NILIPAT SA APPLICANT PROFILE
+                                <div class="form-group col-md-6  fs-5">
+                                  <label for="inputCity">City</label>
+                                  <input type="text" class="form-control p-3 rounded-3" id="inputCity">
+                                </div>
+                                <div class="form-group col-md-4  fs-5">
+                                  <label for="inputState">State</label>
+                                  <select id="inputState" class="form-control p-3 rounded-3">
+                                    <option selected>Choose...</option> #LAGYAN DROPDOWN
+                                    <option>...</option>
+                                  </select>
+                                </div>
+                                <div class="form-group col-md-2  fs-5">
+                                  <label for="inputZip">Zip</label>
+                                  <input type="text" class="form-control p-3 rounded-3" id="inputZip">
+                                </div>
+                              </div>
+                            <div class="mb-3">
+                                <label for="exampleInputEmail" class="form-label">Location</label>
+                                {% render_field form.location class="form-control" %}
+                            </div> -->
+                            <div class="mb-4 px-5"> 
+                                <label for="exampleInputEmail" class="form-label  fs-5 mt-3">Upload Resume</label>
+                                {% render_field form.upload_resume class="form-control p-3 rounded-3" %}
+                            </div>
+                        </form>
+
+                        <hr class="mt-5">
+                        <div class="text-end mt-4 ml-2">
+                            <button type="submit" class="col-md-3 btn rounded-3 p-3 text-white fw-bold" style="width: 150px; background-color: #372554; margin-left: 10px;">Submit</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
+<script src="https://kit.fontawesome.com/e9e220f4bb.js" crossorigin="anonymous"></script>
+
+
+
 {% endblock content %}
+
+

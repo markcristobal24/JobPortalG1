@@ -18,16 +18,20 @@
 
         <style>
 
-        h2{
+        h1, h2{
             font-family: 'Red Hat Display', sans-serif;
             font-weight: bold; 
             color: #202430; 
         } 
 
-        button, label, input, p, a, small{
+        h4, h5, button, label, input, p, a, small{
 
-        font-family: 'Epilogue', sans-serif;
+            font-family: 'Epilogue', sans-serif;
 
+        }
+
+        h4{
+            font-size: 24px;
         }
 
         label{
@@ -178,6 +182,44 @@
         color: #ffffff;
         }
 
+        /* bagong btn */
+        .btn-donate {
+            --clr-font-main: hsla(0 0% 20% / 100);
+            --btn-bg-1: #8A84E2;
+            --btn-bg-2:#372554;
+            --btn-bg-color: hsla(360 100% 100% / 1);
+            --radii: 0.5em;
+            cursor: pointer;
+            padding: 0.9em 1.4em;
+            min-width: 120px;
+            min-height: 44px;
+            font-size: var(--size, 1rem);
+            font-family: "Segoe UI", system-ui, sans-serif;
+            font-weight: 500;
+            transition: 0.8s;
+            background-size: 280% auto;
+            background-image: linear-gradient(325deg, var(--btn-bg-2) 0%, var(--btn-bg-1) 55%, var(--btn-bg-2) 90%);
+            border: none;
+            color: var(--btn-bg-color);
+            box-shadow: 0px 0px 20px #caa0f180, 0px 5px 5px -1px rgba(130, 24, 196, 0.192), inset 4px 4px 8px #caa0f180, inset -4px -4px 8px rgba(121, 7, 166, 0.35);
+            }
+
+            .btn-donate:hover {
+            background-position: right top;
+            }
+
+            .btn-donate:is(:focus, :focus-visible, :active) {
+            outline: none;
+            box-shadow: 0 0 0 3px var(--btn-bg-color), 0 0 0 6px var(--btn-bg-2);
+            }
+
+            @media (prefers-reduced-motion: reduce) {
+            .btn-donate {
+                transition: linear;
+            }
+            }
+
+
         </style>
     </head>
     <body style="background-color: #F1F3F8;">
@@ -273,8 +315,12 @@
                         </li>
                         
                     </ul>
-                     <a href="{% url 'register-applicant' %}" class="btn btn-primary ms-2">Register as Applicant</a>
-                     <a href="{% url 'register-recruiter' %}" class="btn btn-primary">Register as Recruiter</a>
+                    <!--nabago to-->
+                    <button class="btn-donate rounded-3">
+                        <a href="{% url 'login' %}" class="text-white" style="text-decoration: none;">Log in</a>
+                    </button>
+
+
                     {% endif %}
                    
                     {% comment %} <a href="#" class="btn btn-primary me-2">Register</a> {% endcomment %}
@@ -332,6 +378,17 @@
         $('#modalLogOut').modal('hide');
     });
 });
+</script>
+
+<script> //DATE PICKER PARA SA BDAY
+    $(document).ready(function () {
+        $("#bday").datepicker({
+            dateFormat: 'yy-mm-dd', // Set the desired date format
+            changeMonth: true,
+            changeYear: true,
+            yearRange: '1900:' + new Date().getFullYear() // Adjust the year range as needed
+        });
+    });
 </script>
         <script src="https://code.jquery.com/jquery-3.7.0.js"
         integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>

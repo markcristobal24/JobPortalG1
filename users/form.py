@@ -6,6 +6,8 @@ class RegisterUserForm(UserCreationForm):
     class Meta:
         model = get_user_model()
         fields = ['email', 'username', 'password1', 'password2']
+       
+
 
 class ChangePasswordForm(forms.Form):
     current_password = forms.CharField(widget=forms.PasswordInput())
