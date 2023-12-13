@@ -11,6 +11,8 @@ from admin2.models import ActivityLog
 
 # Create your views here.
 def register_applicant(request):
+    if request.user.is_authenticated:
+        return redirect('dashboard')
     if request.method == 'POST':
         form = RegisterUserForm(request.POST)
         if form.is_valid():
@@ -31,6 +33,8 @@ def register_applicant(request):
         return render(request, 'users/register_applicant.html', context)
 
 def register_recruiter(request):
+    if request.user.is_authenticated:
+        return redirect('dashboard')
     if request.method == 'POST':
         form = RegisterUserForm(request.POST)
         if form.is_valid():
@@ -57,6 +61,8 @@ def register_recruiter(request):
         return render(request, 'users/register_recruiter.html', context)
 
 def login_user(request):
+    if request.user.is_authenticated:
+        return redirect('dashboard')
     if request.method == 'POST':
         email = request.POST.get('email')
         password = request.POST.get('password')
