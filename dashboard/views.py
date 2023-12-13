@@ -2,7 +2,9 @@ from django.shortcuts import render, redirect
 from admin2.models import ActivityLog
 from users.models import User
 from job.models import Job
+from django.contrib.auth.decorators import login_required
 
+@login_required
 def dashboard(request):
     logs = ActivityLog.objects.all()
 
