@@ -55,7 +55,32 @@
                 <div class="row">
                     <h1 class="col-md-10 mt-2" style="color: #8A84E2;">Settings</h1>
                     <!-- LAGYAN FUNCTION btn-->
-                    <button type="button" class="btn btn-danger border-3 rounded-3 p-3 fw-bold"  style="width:max-content;;">Delete Account</button>
+                    <div class="col-md-2">
+
+                        <button class="noselect" id="delbtn" data-toggle="modal" data-target="#deleteModal"><span class="text">Delete</span><span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z"></path></svg></span></button>
+
+                    </div>
+
+                    <!-- DELETE MODAL -->
+                    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                          <div class="modal-content">
+                           
+                            <div class="modal-header">
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body text-center">
+                                <img src="https://drive.google.com/uc?id=1ui9e-7W1nVEzlVg_gsK6GdrKSxc28Jp-" alt="" style="height: 100px; width: 100px;">
+                                <h4 class="mx-5 my-3 text-danger">Delete Account</h4>
+                                <small>Are you sure you want to delete this account?</small>
+                
+                                <div class="text-center px-5 mt-4 mb-3">
+                                    <button type="button" class="btn rounded-3 p- px-5 text-white btn-danger" onclick="confirmDelete()">Confirm</button>
+                                </div>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
                 </div>
                 
                 <hr class="mt-5 mb-5">
