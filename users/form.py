@@ -96,4 +96,4 @@ class EditCompanyForm(forms.ModelForm):
 class EditApplicantForm(forms.ModelForm):
     class Meta:
         model = Resume
-        exclude = ['user']
+        fields = ['first_name', 'surname', 'location']

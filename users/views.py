@@ -219,8 +219,8 @@ def applicant_change_profile(request):
                  messages.warning(request, 'Something went wrong')
         else:
             form = EditApplicantForm(instance=resume)
-            context = {'form':form}
-            return render(request, 'company/recruit_change_profile.html', context)
+        context = {'form':form}
+        return render(request, 'company/applicant_change_profile.html', context)
     else:
         return redirect('dashboard') 
             
