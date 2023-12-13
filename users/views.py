@@ -122,26 +122,13 @@ def applicant_profile(request):
     return render(request, 'users/applicant_profile.html')   
 
 def applicant_change_pass(request):
-<<<<<<< HEAD
+
     if request.method == 'POST':
         form = ChangePasswordForm(request.POST)
         if form.is_valid():
             current_password = form.cleaned_data['current_password']
             new_password = form.cleaned_data['new_password']
             confirm_password = form.cleaned_data['confirm_password']
-=======
-    return render(request, 'users/applicant_change_pass.html')   
-
-def recruit_change_pass(request):
-    return render(request, 'company/recruit_change_pass.html')      
-
-
-def recruit_change_profile(request):
-    return render(request, 'company/recruit_change_profile.html') 
-
-
->>>>>>> e9d9e1e5f5e08dfb1f5a2627aaa41296d2ad8c23
-
             if new_password != confirm_password:
                 messages.warning(request, "New passwords do not match.")
                 #return redirect here
@@ -161,6 +148,17 @@ def recruit_change_profile(request):
             form = ChangePasswordForm()
     form = ChangePasswordForm()
     return render(request, 'users/applicant_change_pass.html', {'form': form})         
+  
+
+def recruit_change_pass(request):
+    return render(request, 'company/recruit_change_pass.html')      
+
+
+def recruit_change_profile(request):
+    return render(request, 'company/recruit_change_profile.html') 
+
+
+            
 
 @login_required
 def delete_account(request):
