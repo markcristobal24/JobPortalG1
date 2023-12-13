@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
-from .models import Job, ApplyJob
+from .models import Job, ApplyJob, Industry
 from .form import CreateJobForm, UpdateJobForm
 from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
@@ -58,6 +58,8 @@ def update_job(request, pk):
 
 @login_required    
 def manage_jobs(request):
+
+
     jobs = Job.objects.filter(user=request.user, company=request.user.company)
     context = {'jobs':jobs}
     return render(request, 'job/manage_jobs.html', context)

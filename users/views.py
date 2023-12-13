@@ -18,11 +18,6 @@ def register_applicant(request):
             var.save()
             Resume.objects.create(user=var)
             messages.info(request, 'Your account has been created.')
-            
-            ActivityLog.objects.create(
-                user=f"User {var.id}",
-                details=f"User {var.id} created an applicant account"
-            )
 
             return redirect('login')
         else:
@@ -74,6 +69,11 @@ def login_user(request):
                     user=f"User {user.id}",
                     details=f"User {user.id} logged in"
                 )
+
+            ActivityLog.objects.create(
+                user=f"User {user.id}",
+                details=f"User {user.id} logged in"
+            )
 
             return redirect('dashboard')
         elif user is None:
