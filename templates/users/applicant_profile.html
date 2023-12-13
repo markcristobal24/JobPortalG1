@@ -9,9 +9,11 @@
         <!--  SIDE BAR   -->
         <div class="col-md-3 min-vh-100 px-5 py-3 d-flex flex-column" style=" border-right: 2px solid #d4d4d4; ">
             <div class="d-flex align-items-center" style="border-radius: 10px;">
-                <div class="rounded-circle overflow-hidden me-3" style="width: 50px; height: 50px; border: 2px solid #fff;">
+                <div class="rounded-circle overflow-hidden me-3"
+                    style="width: 50px; height: 50px; border: 2px solid #fff;">
                     <!-- Dito malalagay image ng company-->
-                    <img src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Profile Picture" class="w-100 h-100 object-fit-cover">
+                    <img src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                        alt="Profile Picture" class="w-100 h-100 object-fit-cover">
                 </div>
                 <div>
                     <a class="d-flex text-decoration-none mt-3 align-items-center">
@@ -23,25 +25,30 @@
             <hr>
             <ul class="nav nav-pills flex-column">
                 <li class="nav-item my-2 py-sm-0 mt-3">
-                    <a href="{% url 'applied-jobs' %}" class="nav-link"> 
-                        <i class="fa-solid fa-file-contract" style="width: 20px; height: 20px;"></i><span class="fs-6 ms-2 d-none d-sm-inline" >Job Applications</span>
+                    <a href="{% url 'applied-jobs' %}" class="nav-link">
+                        <i class="fa-solid fa-file-contract" style="width: 20px; height: 20px;"></i><span
+                            class="fs-6 ms-2 d-none d-sm-inline">Job Applications</span>
                     </a>
                 </li>
                 <li class="nav-item my-2 py-sm-0">
                     <a href="{% url 'update-resume' %}" class="nav-link">
-                        <i class="fa-solid fa-file-edit" style="width: 20px; height: 20px;"></i><span class="fs-6 d-none ms-2 d-sm-inline">Create Resume</span>
+                        <i class="fa-solid fa-file-edit" style="width: 20px; height: 20px;"></i><span
+                            class="fs-6 d-none ms-2 d-sm-inline">Create Resume</span>
                     </a>
                 </li>
                 <hr>
                 <p class="ms-3 py-2">Setting</p>
                 <li class="nav-item my-2 py-sm-0">
-                    <a href="{% url 'applicant-profile' %}" class="nav-link fw-bold" style="background-color:  #E9EBFD; color: #372554;" ><!-- NEW PAGE TO -->
-                        <i class="fa-solid fa-user-tie" style="width: 20px; height: 20px;"></i><span class="fs-6 d-none ms-2 d-sm-inline">My Profile</span>
+                    <a href="{% url 'applicant-profile' %}" class="nav-link fw-bold"
+                        style="background-color:  #E9EBFD; color: #372554;"><!-- NEW PAGE TO -->
+                        <i class="fa-solid fa-user-tie" style="width: 20px; height: 20px;"></i><span
+                            class="fs-6 d-none ms-2 d-sm-inline">My Profile</span>
                     </a>
                 </li>
                 <li class="nav-item my-2 py-sm-0">
-                    <a href="{% url 'applicant-change-pass' %}" class="nav-link" >
-                        <i class="fa-solid fa-lock" style="width: 20px; height: 20px;"></i><span class="fs-6 d-none ms-2 d-sm-inline">Change Password</span>
+                    <a href="{% url 'applicant-change-pass' %}" class="nav-link">
+                        <i class="fa-solid fa-lock" style="width: 20px; height: 20px;"></i><span
+                            class="fs-6 d-none ms-2 d-sm-inline">Change Password</span>
                     </a>
                 </li>
             </ul>
@@ -51,13 +58,14 @@
 
         <div class="col-md-8 mx-5">
             <div class="container p-5">
-                
+
                 <div class="row">
                     <h1 class="col-md-10 mt-2" style="color: #8A84E2;">Settings</h1>
                     <!-- LAGYAN FUNCTION btn-->
-                    <button type="button" class="btn btn-danger border-3 rounded-3 p-3 fw-bold"  style="width:max-content;;">Delete Account</button>
+                    <button type="button" id="delete_account" class="btn btn-danger border-3 rounded-3 p-3 fw-bold"
+                        style="width:max-content;;">Delete Account</button>
                 </div>
-                
+
                 <hr class="mt-5 mb-5">
 
                 <form action="post">
@@ -67,11 +75,13 @@
                         </div>
                         <div class="col-md-7">
                             <div class="form-group">
-                                <input type="file" class="form-control rounded-3 mt-2" id="profilePic" name="profile_pic" onchange="previewImage(this)">
+                                <input type="file" class="form-control rounded-3 mt-2" id="profilePic"
+                                    name="profile_pic" onchange="previewImage(this)">
                             </div>
                             <div class="form-group text-center mt-5">
                                 <!-- NAKA DISPLAY DITO CURRENT PIC -->
-                                <img id="preview" src="#" alt="Profile Preview" class="img-fluid mx-auto d-block mt-2" style="width: 350px; height: 350px; display: none; border-radius: 30px;">
+                                <img id="preview" src="#" alt="Profile Preview" class="img-fluid mx-auto d-block mt-2"
+                                    style="width: 350px; height: 350px; display: none; border-radius: 30px;">
                             </div>
                         </div>
                         <hr class="mt-5">
@@ -87,11 +97,13 @@
                             <div class="row mt-5">
                                 <div class="form-group col mb-4">
                                     <label for="firstName">First Name</label>
-                                    <input type="text" class="form-control p-3 rounded-3 mt-2" id="firstName" name="first_Name">
+                                    <input type="text" class="form-control p-3 rounded-3 mt-2" id="firstName"
+                                        name="first_Name">
                                 </div>
                                 <div class="form-group col mb-4">
                                     <label for="lastName">Last Name</label>
-                                    <input type="text" class="form-control p-3 rounded-3 mt-2" id="lastName" name="last_Name">
+                                    <input type="text" class="form-control p-3 rounded-3 mt-2" id="lastName"
+                                        name="last_Name">
                                 </div>
                             </div>
 
@@ -100,34 +112,36 @@
                                 <div class="col-auto">
                                     <label class="sr-only" for="inlineFormInputGroup">Username</label>
                                     <div class="input-group mb-2">
-                                      <div class="input-group-prepend">
-                                        <div class="input-group-text p-3 rounded-3 mt-2">@</div>
-                                      </div>
-                                      <input type="text" class="form-control p-3 -3 mt-2" id="inlineFormInputGroup" placeholder="Username">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text p-3 rounded-3 mt-2">@</div>
+                                        </div>
+                                        <input type="text" class="form-control p-3 -3 mt-2" id="inlineFormInputGroup"
+                                            placeholder="Username">
                                     </div>
-                                  </div>
+                                </div>
                             </div>
 
                             <div class="form-group mb-4">
                                 <label for="emailAdd">Email Address</label>
-                                <input type="text" class="form-control p-3 rounded-3 mt-2" id="emailAdd" name="email_Add" >
+                                <input type="text" class="form-control p-3 rounded-3 mt-2" id="emailAdd"
+                                    name="email_Add">
                             </div>
 
-                            <div class="row mb-4">  
+                            <div class="row mb-4">
                                 <div class="form-group col-md-6">
-                                  <label for="inputCity">City</label>
-                                  <input type="text" class="form-control p-3 rounded-3" id="inputCity">
+                                    <label for="inputCity">City</label>
+                                    <input type="text" class="form-control p-3 rounded-3" id="inputCity">
                                 </div>
                                 <div class="form-group col-md-4">
-                                  <label for="inputState">State</label>
-                                  <select id="inputState" class="form-control p-3 rounded-3">
-                                    <option selected>Choose...</option> 
-                                    <option>...</option>
-                                  </select>
+                                    <label for="inputState">State</label>
+                                    <select id="inputState" class="form-control p-3 rounded-3">
+                                        <option selected>Choose...</option>
+                                        <option>...</option>
+                                    </select>
                                 </div>
                                 <div class="form-group col-md-2">
-                                  <label for="inputZip">Zip</label>
-                                  <input type="text" class="form-control p-3 rounded-3" id="inputZip">
+                                    <label for="inputZip">Zip</label>
+                                    <input type="text" class="form-control p-3 rounded-3" id="inputZip">
                                 </div>
                             </div>
 
@@ -136,40 +150,76 @@
                                 <input type="date" class="form-control p-3 rounded-3 mt-2" id="bday" name="bday">
                             </div>
                         </div>
-                        
+
                     </div>
 
                 </form>
 
                 <hr class="mt-5">
                 <div class="text-end mt-4 ml-2">
-                        <button type="button" class="col-md-3 btn btn-outline-danger border-3 rounded-3 p-3 fw-bold"  style="width: 150px;">Discard</button>
-                        <button type="submit" class="col-md-3 btn rounded-3 p-3 text-white fw-bold" style="width: 150px; background-color: #372554; margin-left: 10px;">Save</button>
+                    <button type="button" class="col-md-3 btn btn-outline-danger border-3 rounded-3 p-3 fw-bold"
+                        style="width: 150px;">Discard</button>
+                    <button type="submit" class="col-md-3 btn rounded-3 p-3 text-white fw-bold"
+                        style="width: 150px; background-color: #372554; margin-left: 10px;">Save</button>
                 </div>
             </div>
-            
+
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="modalDeleteAccount" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Account Deletion</h5>
+            </div>
+            <div class="modal-body" id="modalDeleteConfirmation">
+                <!-- Updated ID -->
+                <!-- ...modal content for log out confirmation -->
+                Are you sure you want to delete your account?
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="deleteAccBtn"
+                        onclick="window.location.href = '{% url 'delete-account' %}';">
+                        Delete
+                    </button>
+                    <button type="button" class="btn btn-secondary" id="cancelDeleteBtn">
+                        Cancel
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 </div>
 <script src="https://kit.fontawesome.com/e9e220f4bb.js" crossorigin="anonymous"></script>
 
-    <script>
-        function previewImage(input) {
-          var preview = document.getElementById('preview');
-          var file = input.files[0];
-          var reader = new FileReader();
-      
-          reader.onload = function(e) {
+<script>
+    function previewImage(input) {
+        var preview = document.getElementById('preview');
+        var file = input.files[0];
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
             preview.src = e.target.result;
             preview.style.display = 'block';
-          };
-      
-          if (file) {
-            reader.readAsDataURL(file);
-          }
-        }
-    </script>
+        };
 
-  
+        if (file) {
+            reader.readAsDataURL(file);
+        }
+    }
+</script>
+
+<script>
+    // Get the modal
+    var deleteAcc = document.getElementById('delete_account');
+    deleteAcc.addEventListener('click', function () {
+        $('#modalDeleteAccount').modal('show');
+        $('#cancelDeleteBtn').on("click", function (e) {
+            $('#modalDeleteAccount').modal('hide');
+        });
+    });
+</script>
+
+
 
 {% endblock content %}
