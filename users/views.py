@@ -125,8 +125,10 @@ def change_password(request):
 
 #new function sa may applicant
 def applicant_profile(request):
-    
-    return render(request, 'users/applicant_profile.html')   
+    resume = Resume.objects.get(user_id=request.user.id)
+    first_Name = resume.first_name
+    last_Name = resume.surname
+    return render(request, 'users/applicant_profile.html', {'firstname':first_Name, 'lastname':last_Name})   
 
 def applicant_change_pass(request):
     if request.method == 'POST':
@@ -204,23 +206,16 @@ def recruit_change_profile(request):
     else:
         return redirect('dashboard') 
 
-def applicant_change_profile(request):
+def applicant_change_profile(request, user_id):
     if request.user.is_applicant:
-        resume = Resume.objects.get(user=request.user)
-        if request.method == "POST":
-            form = EditApplicantForm(request.POST, request.FILES, instance=resume)
-            if form.is_valid():
-                # var = form.save(commit=False)
-                form.save()
-                messages.info(request, 'Your info has been updated!')
-                return redirect('dashboard')
-            else:
-                 print(form.errors)
-                 messages.warning(request, 'Something went wrong')
-        else:
-            form = EditApplicantForm(instance=resume)
-        context = {'form':form}
-        return render(request, 'company/applicant_change_profile.html', context)
+        resume = Resume.objects.get(user_id=request.user.id)
+        resume.first_name = request.GET.get("first_Name")
+        resume.surname = request.GET.get("last_Name")
+        resume.user.username = request.GET.get("username")
+        resume.user.email = request.GET.get("email_Add")
+        resume.location = request.GET.get("state")
+        resume.save()
+        return render(request, 'users/applicant_profile.html')
     else:
         return redirect('dashboard') 
             
