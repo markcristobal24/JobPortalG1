@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate , login, logout, update_session_auth_hash
 from .models import User
 from .form import RegisterUserForm, ChangePasswordForm
-from company.form import EditCompanyForm
+from .form import EditCompanyForm
 from resume.models import Resume
 from company.models import Company
 from django.contrib.auth.decorators import login_required
@@ -185,10 +185,24 @@ def recruit_change_pass(request):
 
 
 def recruit_change_profile(request):
-    company = Company.objects.get(user=request.user)
-    form = EditCompanyForm(instance=company)
-    context = {'form':form}
-    return render(request, 'company/recruit_change_profile.html', context) 
+    if request.user.is_recruiter:
+        company = Company.objects.get(user=request.user)
+        if request.method == "POST":
+            form = EditCompanyForm(request.POST, request.FILES, instance=company)
+            if form.is_valid():
+                # var = form.save(commit=False)
+                form.save()
+                messages.info(request, 'Your company info has been updated!')
+                return redirect('dashboard')
+            else:
+                 print(form.errors)
+                 messages.warning(request, 'Something went wrong')
+        else:
+            form = EditCompanyForm(instance=company)
+        context = {'form':form}
+        return render(request, 'company/recruit_change_profile.html', context)
+    else:
+        return redirect('dashboard') 
 
 
             

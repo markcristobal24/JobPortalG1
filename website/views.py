@@ -4,8 +4,6 @@ from job.models import Job, ApplyJob
 from .filter import Jobfilter
 
 def home(request):
-    if request.user.is_recruiter:
-        return redirect('dashboard')
     filter = Jobfilter(request.GET, queryset=Job.objects.filter(is_available=True).order_by('-timestamp'))
     context = {'filter':filter}
     return render(request, 'website/home.html', context)
