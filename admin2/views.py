@@ -111,7 +111,7 @@ def edit_user(request, user_id):
     pass
 
 def view_resume(request, user_id):
-    if request.user.is_authenticated and request.user.is_superuser:
+    if request.user.is_authenticated:
         try:
             print("id: ",user_id)
             resume = get_object_or_404(Resume, user=user_id)

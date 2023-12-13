@@ -125,10 +125,8 @@ def change_password(request):
 
 #new function sa may applicant
 def applicant_profile(request):
-    resume = Resume.objects.get(user_id=request.user.id)
-    first_Name = resume.first_name
-    last_Name = resume.surname
-    return render(request, 'users/applicant_profile.html', {'firstname':first_Name, 'lastname':last_Name})   
+    user = User.objects.get(pk=request.user.id)
+    return render(request, 'users/applicant_profile.html', {'user':user})   
 
 def applicant_change_pass(request):
     if request.method == 'POST':
@@ -208,13 +206,10 @@ def recruit_change_profile(request):
 
 def applicant_change_profile(request, user_id):
     if request.user.is_applicant:
-        resume = Resume.objects.get(user_id=request.user.id)
-        resume.first_name = request.GET.get("first_Name")
-        resume.surname = request.GET.get("last_Name")
-        resume.user.username = request.GET.get("username")
-        resume.user.email = request.GET.get("email_Add")
-        resume.location = request.GET.get("state")
-        resume.save()
+        user = User.objects.get(pk=user_id)
+        user.username = request.GET.get("username")
+        user.email = request.GET.get("email_Add")
+        user.save()
         return render(request, 'users/applicant_profile.html')
     else:
         return redirect('dashboard') 
