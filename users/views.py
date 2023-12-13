@@ -115,3 +115,11 @@ def change_password(request):
         else:
             form = ChangePasswordForm()
         #return render here
+
+#new function sa may applicant
+def applicant_profile(request):
+    return render(request, 'users/applicant_profile.html')   
+
+def applicant_change_pass(request):
+    return render(request, 'users/applicant_change_pass.html')         
+

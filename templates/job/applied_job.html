@@ -1,36 +1,116 @@
 {% extends "base.html" %}
 
 {% block content %}
+<div class="container-fluid p-0 " style="background-color: #F1F3F8;">
+    <div class="row flex-nowrap">
 
-<div class="card mx-auto" style="width: 76rem;">
-        <div class="card-body">
-            <h5 class="card-title mb-3">Manage Jobs</h5>
+        <!--  SIDE BAR   -->
+        <div class="col-md-3 min-vh-100 px-5 py-3 d-flex flex-column" style=" border-right: 2px solid #d4d4d4; ">
+            <div class="d-flex align-items-center" style="border-radius: 10px;">
+                <div class="rounded-circle overflow-hidden me-3" style="width: 50px; height: 50px; border: 2px solid #fff;">
+                    <!-- Dito malalagay image ng applicant-->
+                    <img src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Profile Picture" class="w-100 h-100 object-fit-cover">
+                </div>
+                <div>
+                    <a class="d-flex text-decoration-none mt-3 align-items-center">
+                        <span class="fs-5 d-none d-sm-inline" style="color: #372554;">Welcome,</span><br>
+                    </a>
+                    <p style="color: #372554;">{{request.user.email}}<span>!</span></p>
+                </div>
+            </div>
+            <hr>
+            <ul class="nav nav-pills flex-column">
+                <li class="nav-item my-2 py-sm-0 mt-3">
+                    <a href="{% url 'applied-jobs' %}" class="nav-link fw-bold" style="background-color:  #E9EBFD; color: #372554;">
+                        <i class="fa-solid fa-file-contract" style="width: 20px; height: 20px;"></i><span class="fs-6 ms-2 d-none d-sm-inline" >Job Applications</span>
+                    </a>
+                </li>
+                <li class="nav-item my-2 py-sm-0">
+                    <a href="{% url 'update-resume' %}" class="nav-link" >
+                        <i class="fa-solid fa-file-edit" style="width: 20px; height: 20px;"></i><span class="fs-6 d-none ms-2 d-sm-inline">Create Resume</span>
+                    </a>
+                </li>
+                <hr>
+                <p class="ms-3 py-2">Setting</p>
+                <li class="nav-item my-2 py-sm-0">
+                    <a href="{% url 'applicant-profile' %}" class="nav-link"> <!--LAGAY URL NG NEW PAGE-->
+                        <i class="fa-solid fa-user-tie" style="width: 20px; height: 20px;"></i><span class="fs-6 d-none ms-2 d-sm-inline">My Profile</span>
+                    </a>
+                </li>
+                <li class="nav-item my-2 py-sm-0">
+                    <a href="{% url 'applicant-change-pass' %}" class="nav-link" > <!--LAGAY URL NG NEW PAGE-->
+                        <i class="fa-solid fa-lock" style="width: 20px; height: 20px;"></i><span class="fs-6 d-none ms-2 d-sm-inline">Change Password</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
 
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th scope="col">Job Title</th>
-                        <th scope="col">Location</th>
-                        <th scope="col">Salary</th>
-                        <th scope="col">Job Type</th>
-                        <th scope="col">Industry</th>
-                        <th scope="col">Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for job in jobs %}
-                    <tr>
-                        <td>{{job.job.title}}</td>
-                        <td>{{job.job.city}}, {{job.job.state}}</td>
-                        <td>{{job.job.salary}}</td>
-                        <td>{{job.job.job_type}}</td>
-                        <td>{{job.job.industry}}</td>
-                        <td><a href="{% url 'job-details' job.job.pk %}"><small>View Job</small></a></td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+        <!-- DITO YUNG JOB APPLICATION -->
+        
+        <div class="col-md-8 mx-5">
+            <div class="card-body p-5">
+                <h1 class="mt-2 mb-5" style="color: #8A84E2;">Job Application</h1>
+                <hr class="mt-5 mb-5">
+
+                <div class="container mt-5">
+                    <div class="row">
+                        <div class="form-group col-md-8 mb-4">
+                            <h4 class="pt-4 align-middle">Application History</h4>
+                        </div>
+                        <div class="col-md-4">
+                            <form class="form-inline">
+                                <div class="form-group mx-sm-3 mb-2">
+                                    <input type="search" class="form-control py-3 mx-4" id="searchInput" placeholder="Search Application"> <!-- SEARCH BAR FOR APPLICATION-->
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card px-5 pt-5 pb-4">
+    
+                    <table class="table table-striped" style="background-color: #d4d4d4;" >
+                        <thead >
+                            <tr>
+                                <th class="fs-5 p-3" scope="col">Job Title</th>
+                                <th class="fs-5 p-3" scope="col">Location</th>
+                                <th class="fs-5 p-3" scope="col">Salary</th>
+                                <th class="fs-5 p-3" scope="col">Job Type</th>
+                                <th class="fs-5 p-3" scope="col">Industry</th>
+                                <th class="fs-5 p-3 text-center" scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody style="font-family: 'Epilogue', sans-serif;">
+                            {% for job in jobs %}
+                            <tr class="align-middle">
+                                <td class="fs-5 p-3">{{job.job.title}}</td>
+                                <td class="fs-5 p-3">{{job.job.city}}, {{job.job.state}}</td>
+                                <td class="fs-5 p-3">{{job.job.salary}}</td>
+                                <td class="fs-5 p-3">{{job.job.job_type}}</td>
+                                <td class="fs-5 p-3">{{job.job.industry}}</td>
+                                <td class="fs-5 p-3 text-center"> <!-- NEW ACTION BTTON-->
+                                    <a href="{% url 'job-details' job.job.pk %}">
+                                        <button type="submit" class="btn btn-danger border-3 rounded-3 p-2 text-white">
+                                            <i class="fas fa-close px-2"></i> Cancel
+                                        </button>
+                                    </a>
+                                </td>
+                                <!-- ORIGINAL NA ACTION BUTTON
+                                    <td class="fs-5 p-3"><a href="{% url 'job-details' job.job.pk %}"><small>View Job</small></a></td> -->
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                
+            </div>
         </div>
     </div>
+</div>
+<script src="https://kit.fontawesome.com/e9e220f4bb.js" crossorigin="anonymous"></script>
+
+
 
 {% endblock content %}
+
+
