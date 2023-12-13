@@ -3,6 +3,63 @@
 
 {% block content %}
 
+<<<<<<< HEAD
+<div class="container">
+    <div class="container py-4">
+        <section class="py-5">
+            <div class="p-4 rounded-3" style="background-color: #ffffff;">
+                    <div class="row container p-3">
+                        <div class="col-md-3">
+                            <img src="https://drive.google.com/uc?id=18MAIBEgfMRkhOI8E3BNU_CvFq_2nYRsc" class="img-fluid" alt="Responsive image"> <!-- DITO LOGO NG COMPANY-->
+                        </div>
+                        <div class="col-md-9">
+                            <h1 class="col-md-9 display-5 fw-bold mt-5">{{job.title}}</h1>
+                            <div class=" align-items-center d-flex">
+                                <p class="col-md-8 fs-5 mt-3">{{job.city}} | {{job.job_type}} | PHP {{job.salary|intcomma}}</p>
+                                <div class="text-end align-items-center" style="margin-right: 20px;">
+                                    {% if has_applied == False %}
+                                        <a href="{% url 'apply-to-job' job.pk %}" class="btn btn-lg fw-bold" style="background-color: #8A84E2; color: rgb(255, 255, 255);" type="button">Apply Now</a>
+                                    {% else %}
+                                        <p><span class="text-danger fw-bold">You have already applied for this job</span></p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="mt-4">
+                        <div>
+                            <h3 class="fw-bold mt-3">Job Requirements</h3>
+                            <p class="fs-5">{{job.requirements}}</p>
+                    
+                            <h3 class="fw-bold">Ideal Candidate</h3>
+                            <p class="fs-5">{{job.ideal_candidate}}</p>
+                        </div> 
+                        <hr class="mt-3">
+                            <div class="col  mt-4">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <h3 class="fw-bold mt-3 mb-3">Other Details</h3>
+                                        <p class="fs-5">This is a wider</p>
+                                    </div>
+                                    <div class="card-footer">
+                                        <small class="text-muted">Last updated</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col mt-4">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <h3 class="fw-bold mt-3 mb-3">About the Company</h3>
+                                        <p class="fs-5">{{job.company.name}}</p>
+                                        <p class="fs-5">{{job.company.city}}, {{job.company.state}}</p>
+                                        <p class="fs-5">Established on: {{job.company.est_date}}</p>
+                                    </div>
+                                    <div class="card-footer">
+                                        <small class="text-muted">Last updated</small>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+=======
 <section>
     <div class="p-5 mb-4 bg-light rounded-3">
         <div class="container-fluid py-5">
@@ -16,46 +73,19 @@
         </div>
     </div>
 </section>
+>>>>>>> aae4653638b58427ad431886a9c7f063b1ce5730
 
-<div>
-    <section>
-        <h5>Job Requirements</h5>
-        <p>{{job.requirements}}</p>
-    </section>
-</div> <br>
-
-<div>
-    <section>
-        <h5>Ideal Candidate</h5>
-        <p>{{job.ideal_candidate}}</p>
-    </section>
-</div> <br>
-
-<div class="row row-cols-1 row-cols-md-3 g-4">
-    <div class="col">
-        <div class="card h-100">
-            <div class="card-body">
-                <h5 class="card-title">Other Details</h5>
-                <p class="card-text">This is a wider</p>
             </div>
-            <div class="card-footer">
-                <small class="text-muted">Last updated</small>
-            </div>
-        </div>
+            
+        </section>
     </div>
-    <div class="col">
-        <div class="card h-100">
-            <div class="card-body">
-                <h5 class="card-title">About the Company</h5>
-                <p class="card-text">{{job.company.name}}</p>
-                <p class="card-text">{{job.company.city}}, {{job.company.state}}</p>
-                <p class="card-text">{{job.company.est_date}}</p>
-            </div>
-            <div class="card-footer">
-                <small class="text-muted">Last updated</small>
-            </div>
-        </div>
-    </div>
-</div> <br>
+
+</div>
+
+
+
+
+
+
 
 {% endblock content %}
