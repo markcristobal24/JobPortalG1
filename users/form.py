@@ -2,6 +2,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import get_user_model
 from django import forms
 from company.models import Company
+from resume.models import Resume
 
 class RegisterUserForm(UserCreationForm):
     class Meta:
@@ -91,3 +92,8 @@ class EditCompanyForm(forms.ModelForm):
             }
         )
     )
+
+class EditApplicantForm(forms.ModelForm):
+    class Meta:
+        model = Resume
+        fields = ['first_name', 'surname', 'location']

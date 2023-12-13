@@ -124,6 +124,85 @@
                                 </div>
                             </div> 
 
+                            <!-- Users -->
+                            <div class="col-md-4 col-lg-3 mt-3" style="padding-left: 20px;">
+                                <div class="card text-bg-light mb-3" style="width: 950px; height: 253px; overflow: auto;">
+                                    <div class="card-header fw-bold">Users</div>
+                                    <div class="card-body bg-white" style="height: 150px;">
+                                        <table class="table table-nowrap">
+                                            <thead>
+                                                <tr class="align-middle">
+                                                    <th scope="col" class="text-start">ID</th>
+                                                    <th scope="col" class="text-center">Username</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for user2 in userlist %}
+                                                <tr class="align-middle">
+                                                    <td class="text-center fw-bold">{{ user2.id }}</td>
+                                                    <td class="text-center">{{ user2.username }}</td>
+                                                </tr>
+                                                {% endfor %}
+                                            
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div> 
+
+                            <!-- Companies -->
+                            <div class="col-md-4 col-lg-3 mt-3" style="padding-left: 20px;">
+                                <div class="card text-bg-light mb-3" style="width: 950px; height: 253px; overflow: auto;">
+                                    <div class="card-header fw-bold">Companies</div>
+                                    <div class="card-body bg-white" style="height: 150px;">
+                                        <table class="table table-nowrap">
+                                            <thead>
+                                                <tr class="align-middle">
+                                                    <th scope="col" class="text-start">ID</th>
+                                                    <th scope="col" class="text-center">Company</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for company in companylist reversed %}
+                                                    {% if company.name is not None %}
+                                                    <tr class="align-middle">
+                                                        <td class="text-center fw-bold">{{ company.id }}</td>
+                                                        <td class="text-center">{{ company.name }}</td>
+                                                    </tr>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>     
+
+                            <!-- Jobs -->
+                            <div class="col-md-4 col-lg-3 mt-3" style="padding-left: 20px;">
+                                <div class="card text-bg-light mb-3" style="width: 950px; height: 253px; overflow: auto;">
+                                    <div class="card-header fw-bold">Jobs</div>
+                                    <div class="card-body bg-white" style="height: 150px;">
+                                        <table class="table table-nowrap">
+                                            <thead>
+                                                <tr class="align-middle">
+                                                    <th scope="col" class="text-start">ID</th>
+                                                    <th scope="col" class="text-center">Job</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for job in joblist %}
+                                                <tr class="align-middle">
+                                                    <td class="text-center fw-bold">{{ job.id }}</td>
+                                                    <td class="text-center">{{ job.title }}</td>
+                                                </tr>
+                                                {% endfor %}
+                                            
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>                                                 
                             <!-- Generate Reports Button -->
                     </main>
                      </div>

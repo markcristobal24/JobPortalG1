@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from .views import applicant_change_profile
 
 urlpatterns = [
     path('register-applicant/', views.register_applicant, name='register-applicant'),
@@ -14,6 +15,6 @@ urlpatterns = [
     path('recruit-change-pass/', views.recruit_change_pass, name='recruit-change-pass'),
     path('recruit-change-profile/', views.recruit_change_profile, name='recruit-change-profile'),
     
-
+    path('applicant-change-profile/', applicant_change_profile, name='applicant-change-profile'),
 
 ]

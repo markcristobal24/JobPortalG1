@@ -4,6 +4,7 @@ from django.contrib import messages
 from users.models import User
 from job.models import Job
 from resume.models import Resume
+from company.models import Company
 from django.http import FileResponse
 from django.shortcuts import get_object_or_404
 from django.http import Http404, HttpResponse, HttpResponseNotFound
@@ -39,7 +40,20 @@ def manage_reports(request):
         job_count = 0
         for job in jobs:
             job_count+=1
-        return render(request, 'admin/manage_reports.html', {'applicants':applicant_count, 'recruiters':recruiter_count, 'jobs':job_count})
+
+        logs = ActivityLog.objects.all()
+
+        companies = Company.objects.all()
+
+        return render(request, 'admin/manage_reports.html', {
+            'applicants':applicant_count, 
+            'recruiters':recruiter_count, 
+            'jobs':job_count,
+            'logs':logs,
+            'userlist':users,
+            'joblist':jobs,
+            'companylist':companies
+            })
     elif request.user.is_authenticated:
         return redirect('dashboard')
 
