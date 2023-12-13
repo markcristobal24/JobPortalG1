@@ -18,9 +18,9 @@ class Industry(models.Model):
 
 class Job(models.Model):
     job_type_choices = (
-        ('Remote', 'Remote'),
-        ('Onsite', 'Onsite'),
-        ('Hybrid', 'Hybrid')
+        ('Part-Time', 'Part-Time'),
+        ('Full-Time', 'Full-Time')
+        
     )
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     company = models.ForeignKey(Company, on_delete=models.CASCADE)

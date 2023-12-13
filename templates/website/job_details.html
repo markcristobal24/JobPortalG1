@@ -3,6 +3,7 @@
 
 {% block content %}
 
+<<<<<<< HEAD
 <div class="container">
     <div class="container py-4">
         <section class="py-5">
@@ -58,6 +59,21 @@
                                 </div>
                             </div>
                     </div>
+=======
+<section>
+    <div class="p-5 mb-4 bg-light rounded-3">
+        <div class="container-fluid py-5">
+            <h2 class="display-5 fw-bold">{{job.title}}</h2>
+            <p class="col-md-8 fs-5 mt-3">{{job.city}} | {{job.job_type}} | PHP{{job.salary|intcomma}}</p>
+            {% if has_applied == False %}
+            <a href="{% url 'apply-to-job' job.pk %}" class="btn btn-primary btn-lg" type="button">Apply Now</a>
+            {% else %}
+            <p><span class="text-danger">You have already applied for this job</span></p>
+            {% endif %}
+        </div>
+    </div>
+</section>
+>>>>>>> aae4653638b58427ad431886a9c7f063b1ce5730
 
             </div>
             

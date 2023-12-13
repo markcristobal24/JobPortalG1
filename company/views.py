@@ -3,15 +3,15 @@ from django.contrib import messages
 from .models import Company
 from .form import UpdateCompanyForm
 from users.models import User
-
-
+from django.contrib.auth.decorators import login_required
 
 # update company
+@login_required
 def update_company(request):
     if request.user.is_recruiter:
         company = Company.objects.get(user=request.user)
         if request.method == "POST":
-            form = UpdateCompanyForm(request.POST, instance=company)
+            form = UpdateCompanyForm(request.POST, request.FILES, instance=company)
             if form.is_valid():
                 var = form.save(commit=False)
                 user = User.objects.get(id=request.user.id)
@@ -31,6 +31,7 @@ def update_company(request):
         return redirect('dashboard')
 
 #view company details
+@login_required
 def company_details(request, pk):
     company = Company.objects.get(pk=pk)
     context = {'company':company}

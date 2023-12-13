@@ -22,24 +22,24 @@
             <ul class="nav nav-pills flex-column">
                 <li class="nav-item my-2 py-sm-0 mt-3">
                     <a href="{% url 'create-job' %}" class="nav-link fw-bold" style="background-color:  #E9EBFD; color: #372554;">
-                        <i class="fa-solid fa-gauge" style="width: 20px; height: 20px;"></i><span class="fs-6 ms-2 d-none d-sm-inline" >Create Job Listing</span>
+                        <i class="fa-solid fa-circle-plus" style="width: 20px; height: 20px;"></i><span class="fs-6 ms-2 d-none d-sm-inline" >Create Job Listing</span>
                     </a>
                 </li>
                 <li class="nav-item my-2 py-sm-0">
                     <a href="{% url 'manage-jobs' %}" class="nav-link">
-                        <i class="fa-solid fa-users" style="width: 20px; height: 20px;"></i><span class="fs-6 d-none ms-2 d-sm-inline">Manage Jobs</span>
+                        <i class="fa-solid fa-list-check" style="width: 20px; height: 20px;"></i><span class="fs-6 d-none ms-2 d-sm-inline">Manage Jobs</span>
                     </a>
                 </li>
                 <hr>
                 <p class="ms-3 py-2">Setting</p>
                 <li class="nav-item my-2 py-sm-0">
-                    <a href="#" class="nav-link">
-                        <i class="fa-solid fa-user-tie" style="width: 20px; height: 20px;"></i><span class="fs-6 d-none ms-2 d-sm-inline">Change Password</span>
+                    <a href="{% url 'recruit-change-pass' %}" class="nav-link">
+                        <i class="fa-solid fa-key" style="width: 20px; height: 20px;"></i><span class="fs-6 d-none ms-2 d-sm-inline">Change Password</span>
                     </a>
                 </li>
                 <li class="nav-item my-2 py-sm-0 mb-3">
-                    <a href="#" class="nav-link">
-                        <i class="fa-solid fa-file-contract" style="width: 20px; height: 20px;"></i><span class="fs-6 d-none ms-2 d-sm-inline">Edit Profile</span>
+                    <a href="{% url 'recruit-change-profile' %}" class="nav-link">
+                        <i class="fa-solid fa-pen-to-square" style="width: 20px; height: 20px;"></i><span class="fs-6 d-none ms-2 d-sm-inline">Edit Profile</span>
                     </a>
                 </li>
             </ul>
@@ -66,7 +66,7 @@
                                     <hr class="mb-5">
 
                                     <div class="col-md-4">
-                                        <h5 class="card-title mb-1" style="color: #372554;"><i class="fa-regular fa-building me-3"></i>Job Title</h5>
+                                        <h5 class="card-title mb-1" style="color: #372554; font-size: 23px;"><i class="fa-regular fa-building me-3"></i>Job Title</h5>
                                         <span>Summarizing role details to attract applicants</span>
                                     </div>
                                     <div class="col-md-7 ms-3">
@@ -77,7 +77,7 @@
                                     </div><hr class="mb-5 mt-3">
 
                                     <div class="col-md-4">
-                                        <h5 class="card-title mb-1" style="color: #372554;"><i class="fa-solid fa-user-tie me-3"></i>Type of Employment</h5>
+                                        <h5 class="card-title mb-1" style="color: #372554; font-size: 23px;"><i class="fa-solid fa-user-tie me-3"></i>Type of Employment</h5>
                                         <span>You can select type of employment</span>
                                     </div>
                                     <div class="col-md-7 ms-3">
@@ -96,12 +96,12 @@
                                     </div><hr class="mb-5 mt-3">
 
                                     <div class="col-md-4">
-                                        <h5 class="card-title mb-1" style="color: #372554;"><i class="fa-solid fa-earth-asia me-3"></i>Location</h5>
+                                        <h5 class="card-title mb-1" style="color: #372554; font-size: 23px;"><i class="fa-solid fa-earth-asia me-3"></i>Location</h5>
                                         <span>Specify the location of the company or workplace.</span>
                                     </div>
                                     <div class="col-md-7 ms-3 mb-3">
                                         <div class="mb-4">
-                                            <label for="exampleInputEmail" class="form-label">City</label>
+                                            <label for="exampleInputEmail" class="form-label">Address</label>
                                             {% render_field form.city class="form-control p-3 rounded-3" placeholder="Enter City" %}
                                         </div>
                                         <div class="mb-4">
@@ -112,7 +112,7 @@
 
 
                                     <div class="col-md-4">
-                                        <h5 class="card-title mb-1" style="color: #372554;"><i class="fa-regular fa-rectangle-list me-3"></i></i>Skills</h5>
+                                        <h5 class="card-title mb-1" style="color: #372554; font-size: 23px;"><i class="fa-regular fa-rectangle-list me-3"></i></i>Skills</h5>
                                         <span>Add required skills for the job.</span>
                                     </div>
                                     <div class="col-md-7 ms-3">

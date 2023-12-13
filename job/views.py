@@ -20,7 +20,7 @@ def create_job(request):
                 messages.info(request, 'New job has been created')
                 applicant_emails = User.objects.filter(receive_alerts=True).values_list('email', flat=True)
                 for email in applicant_emails:
-                    send_mail('Jobbl: New Job Alert', f"{var.company} has posted a new job listing for the {var.title} position. Check it out!", 'jobbl.jobalerts@gmail.com', [email], fail_silently=False)
+                    send_mail('Jobbl: New Job Alert', f"{var.company.name} has posted a new job listing for the {var.title} position. Check it out!", 'jobbl.jobalerts@gmail.com', [email], fail_silently=False)
                 
                 return redirect('dashboard')
             else:
@@ -55,12 +55,14 @@ def update_job(request, pk):
         form = UpdateJobForm(instance=job)
         context = {'form':form}
         return render(request, 'job/update_job.html', context)
-    
+
+@login_required    
 def manage_jobs(request):
     jobs = Job.objects.filter(user=request.user, company=request.user.company)
     context = {'jobs':jobs}
     return render(request, 'job/manage_jobs.html', context)
 
+@login_required
 def apply_to_job(request, pk):
     if request.user.is_authenticated and request.user.is_applicant:
         job = Job.objects.get(pk=pk)
@@ -84,18 +86,21 @@ def apply_to_job(request, pk):
     else:
         messages.info(request, 'Please login to continue')
         return redirect('login')
-    
+
+@login_required    
 def all_applicants(request, pk):
     job = Job.objects.get(pk=pk)
     applicants = job.applyjob_set.all()
     context = {'job':job, 'applicants':applicants}
     return render(request, 'job/all_applicants.html', context)
 
+@login_required
 def applied_jobs(request):
     jobs = ApplyJob.objects.filter(user=request.user)
     context = {'jobs':jobs}
     return render(request, 'job/applied_job.html', context)
 
+@login_required
 def delete_job(request, pk):
     delete_job = get_object_or_404(Job, pk=pk)
     try:
