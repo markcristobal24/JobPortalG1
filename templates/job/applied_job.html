@@ -69,7 +69,7 @@
 
                 <div class="card px-5 pt-5 pb-4">
     
-                    <table class="table table-striped" style="background-color: #d4d4d4;" >
+                    <table class="table" style="background-color: #d4d4d4;" >
                         <thead >
                             <tr>
                                 <th class="fs-5 p-3" scope="col">Job Title</th>
@@ -89,11 +89,35 @@
                                 <td class="fs-5 p-3">{{job.job.job_type}}</td>
                                 <td class="fs-5 p-3">{{job.job.industry}}</td>
                                 <td class="fs-5 p-3 text-center"> <!-- NEW ACTION BTTON-->
-                                    <a href="{% url 'job-details' job.job.pk %}">
-                                        <button type="submit" class="btn btn-danger border-3 rounded-3 p-2 text-white">
-                                            <i class="fas fa-close px-2"></i> Cancel
-                                        </button>
-                                    </a>
+                                    <div>
+                                        <div class="col-md-2">
+
+                                            <button class="noselect" id="delbtn" data-toggle="modal" data-target="#deleteModal"><span class="text">Cancel</span><span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z"></path></svg></span></button>
+                    
+                                        </div>
+                    
+                                        <!-- DELETE MODAL -->
+                                        <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                              <div class="modal-content">
+                                               
+                                                <div class="modal-header">
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body text-center">
+                                                    <img src="https://drive.google.com/uc?id=1ui9e-7W1nVEzlVg_gsK6GdrKSxc28Jp-" alt="" style="height: 100px; width: 100px;">
+                                                    <h4 class="mx-5 my-3 text-danger">Cancel Application</h4>
+                                                    <small>Are you sure you want to cancel this account?</small>
+                                    
+                                                    <div class="text-center px-5 mt-4 mb-3">
+                                                        <button type="button" class="btn rounded-3 p- px-5 text-white btn-danger" onclick="confirmDelete()">Confirm</button>
+                                                    </div>
+                                                </div>
+                    
+                                              </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </td>
                                 <!-- ORIGINAL NA ACTION BUTTON
                                     <td class="fs-5 p-3"><a href="{% url 'job-details' job.job.pk %}"><small>View Job</small></a></td> -->
