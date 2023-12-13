@@ -9,7 +9,7 @@
             <div class="d-flex align-items-center" style="border-radius: 10px;">
                 <div class="rounded-circle overflow-hidden me-3" style="width: 50px; height: 50px; border: 2px solid #fff;">
                     <!-- Dito malalagay image ng company-->
-                    <img src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Profile Picture" class="w-100 h-100 object-fit-cover">
+                    <img src="{{request.user.company.company_logo.url}}" alt="Profile Picture" class="w-100 h-100 object-fit-cover">
                 </div>
                 <div>
                     <a class="d-flex text-decoration-none mt-3 align-items-center">

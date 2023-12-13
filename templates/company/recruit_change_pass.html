@@ -12,7 +12,7 @@
             <div class="d-flex align-items-center" style="border-radius: 10px;">
                 <div class="rounded-circle overflow-hidden me-3" style="width: 50px; height: 50px; border: 2px solid #fff;">
                     <!-- Dito malalagay image ng company-->
-                    <img src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Profile Picture" class="w-100 h-100 object-fit-cover">
+                    <img src="{{request.user.company.company_logo.url}}" alt="Profile Picture" class="w-100 h-100 object-fit-cover">
                 </div>
                 <div>
                     <a class="d-flex text-decoration-none mt-3 align-items-center">
@@ -65,21 +65,35 @@
                     <div class="col-md-7">
             
             
-                        <form id="passwordForm">
-            
+                        <form id="passwordForm" method="POST">
+                            {% csrf_token %}
                             <div class="form-group mb-3">
-                              <label for="newPassword">Old Password</label>
-                              <input type="password" class="form-control p-3 rounded-3 mt-2" id="newPassword" required>
+                              <label for="{{ form.current_password.id_for_label }}">Old Password</label>
+                              {{ form.current_password }}
                             </div>
                             <div class="form-group mb-3">
-                              <label for="confirmPassword">New Password</label>
-                              <input type="password" class="form-control p-3 rounded-3 mt-2" id="confirmPassword" required>
+                              <label for="{{ form.new_password.id_for_label }}">New Password</label>
+                              {{ form.new_password }}
                             </div>
+                            <div class="password_requirements">
+                                    <h6 id="length_con"><span class="length me-1" id="length">&#x2716;</span>be atleast
+                                        8 characters
+                                        but not more than 20</h6>
+                                    <h6 id="case_con"><span class="case me-1" id="case">&#x2716;</span> contain at least
+                                        one
+                                        uppercase and lowercase letter</h6>
+                                    <h6 id="number_con"><span class="number me-1" id="number">&#x2716;</span> contain at
+                                        least one
+                                        number</h6>
+                                    <h6 id="special_con"><span class="special me-1" id="special">&#x2716;</span> contain
+                                        one of the
+                                        following characters: @ . # $ % ^ & , *</h6>
+                                </div>
                             <div class="form-group">
-                                <label for="confirmPassword">Confirm Password</label>
-                                <input type="password" class="form-control p-3 rounded-3 mt-2" id="confirmPassword" required>
+                                <label for="{{ form.confirm_password.id_for_label }}">Confirm Password</label>
+                                {{ form.confirm_password }}
                             </div>
-                            <div class="text-end"><button type="submit" class="btn rounded-3 p-2 text-white m-5" style="width: 150px; background-color: #372554;">Submit</button></div>
+                            <div class="text-end"><button id="changepass_btn" type="submit" class="btn rounded-3 p-2 text-white m-5" style="width: 150px; background-color: #372554;" disabled>Submit</button></div>
                         </form>    
                     </div>
                     <hr>
@@ -88,6 +102,69 @@
         </div>
     </div>
 </div>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var passwordField = document.querySelector('#newPass');
+        if (passwordField) {
+            passwordField.addEventListener('keyup', function () {
+                verify_password(this.value);
+            });
+        }
+
+        function verify_password(password) {
+            console.log('hey');
+            document.querySelector(".length").style.opacity = 1;
+            document.querySelector(".case").style.opacity = 1;
+            document.querySelector(".special").style.opacity = 1;
+            document.querySelector(".number").style.opacity = 1;
+            let case_requirements = /^(?=.*[a-z])(?=.*[A-Z])/;
+            let special_requirements = /(?=.*[@#$%^&,*.])/;
+            let number_requirements = /(?=.*\d)/;
+
+
+            if (password.length >= 8 && password.length <= 16) {
+                document.getElementById("length").innerHTML = "&#x2714";
+                document.getElementById("length_con").style.color = "green";
+            } else {
+                document.getElementById("length").innerHTML = "&#x2716";
+                document.getElementById("length_con").style.color = "red";
+            }
+
+            if (password.match(case_requirements)) {
+                document.getElementById("case").innerHTML = "&#x2714";
+                document.getElementById("case_con").style.color = "green";
+            } else {
+                document.getElementById("case").innerHTML = "&#x2716";
+                document.getElementById("case_con").style.color = "red";
+            }
+
+            if (password.match(special_requirements)) {
+                document.getElementById("special").innerHTML = "&#x2714";
+                document.getElementById("special_con").style.color = "green";
+            } else {
+                document.getElementById("special").innerHTML = "&#x2716";
+                document.getElementById("special_con").style.color = "red";
+            }
+
+            if (password.match(number_requirements)) {
+                document.getElementById("number").innerHTML = "&#x2714";
+                document.getElementById("number_con").style.color = "green";
+            } else {
+                document.getElementById("number").innerHTML = "&#x2716";
+                document.getElementById("number_con").style.color = "red";
+            }
+
+            if ((password.length >= 8 && password.length <= 16) && password.match(case_requirements) && password.match(special_requirements) && password.match(number_requirements)) {
+                document.querySelector(".password_requirements").classList.remove("password_requirement_active");
+                document.getElementById('changepass_btn').disabled = false;
+            }
+            else {
+                document.querySelector(".password_requirements").classList.add("password_requirement_active");
+                document.getElementById('changepass_btn').disabled = true;
+            }
+        }
+    });
+</script>
 <script src="https://kit.fontawesome.com/e9e220f4bb.js" crossorigin="anonymous"></script>
 
 {% endblock content %}

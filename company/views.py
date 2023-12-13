@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from .models import Company
-from .form import UpdateCompanyForm
+from .form import UpdateCompanyForm, EditCompanyForm
 from users.models import User
 from django.contrib.auth.decorators import login_required
 
@@ -36,3 +36,22 @@ def company_details(request, pk):
     company = Company.objects.get(pk=pk)
     context = {'company':company}
     return render(request, 'company/company_details.html', context)
+
+@login_required
+def edit_company_profile(request):
+    if request.user.is_recruiter:
+        company = Company.objects.get(user=request.user)
+        if request.method == "POST":
+            form = EditCompanyForm(request.POST, request.FILES, instance=company)
+            if form.is_valid():
+                var = form.save(commit=False)
+                var.save()
+                messages.info(request, 'Your company info has been updated!')
+                return redirect('dashboard')
+            else:
+                 messages.warning(request, 'Something went wrong')
+        form = EditCompanyForm(instance=company)
+        context = {'form':form}
+        return render(request, 'company/recruit_change_profile.html', context)
+    else:
+        return redirect('dashboard')
